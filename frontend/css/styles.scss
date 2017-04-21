@@ -1,0 +1,42 @@
+@import "../css/color";
+
+input.standard-input {
+  height: 17px;
+}
+input.standard-input,
+textarea.standard-textarea {
+  padding: 0;
+  border-bottom: $gray1 1px solid;
+  background: transparent;
+  color: $black;
+  line-height: 15px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+  -webkit-transition-delay: 9999s;
+}
+
+input.standard-input:focus,
+textarea.standard-textarea:focus {
+  border-bottom: $blue 1px solid;
+}
+
+.standard-input-warning {
+  position: relative;
+  top: -2px;
+  color: $orange;
+  font-size: 12px;
+}
+
+.warning-text {
+  color: $error_red;
+}
+
+.unavailable-text {
+  padding: 10px;
+  font-size: 1.5em;
+}

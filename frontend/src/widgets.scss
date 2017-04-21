@@ -1,0 +1,13 @@
+@import '../css/color';
+@import '../css/util';
+.default-checkbox {
+  color: $black;
+  i {
+    width: 16px;
+    padding-left: 2px;
+    text-align: left;
+  }
+}
+.default-checkbox:disabled {
+  color: $gray3;
+}

@@ -1,0 +1,52 @@
+// WARNING: Only do "extends" from this class. Otherwise the css rules will be present as many times as this file is imported
+// Also the content of this file is multiplied for each import. This will be fixed in node-sass v.4.0.0. Until then, there be dragons.
+// See discussion at: https://github.com/jtangelder/sass-loader/issues/145
+
+.center-parent {
+  position: relative;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.center-horisontally {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.center-vertically {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.center-fixed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dropshadow {
+  box-shadow: -3px 0px 2px 0px transparentize(gray, 0.4);
+}
+
+.dropshadow-diagonal {
+  box-shadow: -2px 3px 2px 2px transparentize(gray, 0.4);
+}
+
+.dropshadow-center {
+  box-shadow: 0px 3px 5px 2px transparentize(gray, 0.4);
+}
+
+.flap-close {
+  @extend .dropshadow;
+  position: absolute;
+  top: 6px;
+  padding: 4px 0 4px 3px;
+  border-radius: 3px 0px 0px 3px;
+  background: white;
+  cursor: pointer;
+  z-index: 2;
+}

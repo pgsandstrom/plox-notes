@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "user": "postgres",
+  "password": "abc123",
+  "database": "ploxnotes"
+}
