@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   devtool: 'source-map',
-  entry: ['whatwg-fetch', 'babel-polyfill', './src/entry.jsx'],
+  entry: ['whatwg-fetch', 'babel-polyfill', './src/'],
   output: { path: path.join(__dirname, '/assets/'), filename: 'bundle_prod.js' },
   module: {
     rules: [

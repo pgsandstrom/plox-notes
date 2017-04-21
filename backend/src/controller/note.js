@@ -6,7 +6,7 @@ export const load = id =>
       if (cursor.rows.length === 1) {
         return cursor.rows[0].data;
       } else {
-        return '[]';
+        return [];
       }
     });
 
