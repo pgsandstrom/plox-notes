@@ -15,9 +15,8 @@ class Main extends React.Component {
   render() {
     return (
       <div className="react-root">
-        <div className="main-body">
-          <div>{this.props.params.noteid}</div>
-          <div>Skriv saker:</div>
+        <div className="main">
+          <div className="title">{this.props.params.noteid}</div>
           {this.props.notes.map((note, index) =>
             <Note
               key={index}
@@ -27,9 +26,10 @@ class Main extends React.Component {
               delete={() => this.props.removeNote(index)}
               editNote={text => this.props.editNote(index, text)}
             />)}
-          <button onClick={this.props.addNote}>add</button>
-          <br />
-          <button onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>Save</button>
+          <div className="bottom">
+            <button className="normalize-button standard-button button-add" onClick={this.props.addNote}>add</button>
+            <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>Save</button>
+          </div>
         </div>
       </div>
     );
@@ -47,10 +47,10 @@ Main.propTypes = {
 };
 
 const Note = props => (
-  <div>
+  <div className="note">
     <CheckBox checked={props.checked} checkCb={props.switchChecked} />
     <input className="standard-input" value={props.text} onChange={e => props.editNote(e.target.value)} />
-    <button onClick={props.delete}>delete</button>
+    <button className="normalize-button standard-button delete-button" onClick={props.delete}>delete</button>
   </div>
 );
 Note.propTypes = {

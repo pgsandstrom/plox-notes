@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
+import 'normalize.css';
 
 import store from './store';
-import Welcome from './welcome';
-import Main from './main';
 
 // Load global css rules before our Main component, so we can overwrite them in our components
 import '../css/global.scss';
 import '../css/_util_global.scss';
 import '../css/styles.scss';
 
+import Welcome from './welcome';
+import Main from './main';
 
 const content = document.getElementById('content');
 

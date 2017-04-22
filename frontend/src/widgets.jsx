@@ -11,7 +11,7 @@ export const CheckBox = props => (
     className={`${props.className || ''} normalize-button default-checkbox`}
     disabled={props.disabled}
   >
-    <i className={props.checked ? 'fa fa-check-square-o' : 'fa fa-square-o'} />
+    <i className={props.checked ? 'fa fa-check-square-o fa-2x' : 'fa fa-square-o fa-2x'} />
     <span>{props.text}</span>
   </button>
 );

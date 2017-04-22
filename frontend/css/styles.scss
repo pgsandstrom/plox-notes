@@ -1,8 +1,28 @@
 @import "../css/color";
 
+button.standard-button,
+button.standard-button:hover,
+button.standard-button:focus,
+button.standard-button:active {
+  border: $lightblue 1px solid;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 27px;
+  padding: 0px 10px;
+}
+
+button.standard-button:focus {
+  border: $darkblue 1px solid;
+}
+
+button.standard-button:active {
+  background: $blue;
+}
+
 input.standard-input {
   height: 17px;
 }
+
 input.standard-input,
 textarea.standard-textarea {
   padding: 0;
@@ -32,11 +52,3 @@ textarea.standard-textarea:focus {
   font-size: 12px;
 }
 
-.warning-text {
-  color: $error_red;
-}
-
-.unavailable-text {
-  padding: 10px;
-  font-size: 1.5em;
-}

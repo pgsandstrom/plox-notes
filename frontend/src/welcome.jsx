@@ -12,6 +12,7 @@ class Welcome extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
+    this.goto = this.goto.bind(this);
   }
 
   onChange(e) {
@@ -21,9 +22,13 @@ class Welcome extends React.Component {
   onKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      const path = `/${this.state.id}`;
-      browserHistory.push(path);
+      this.goto();
     }
+  }
+
+  goto() {
+    const path = `/${this.state.id}`;
+    browserHistory.push(path);
   }
 
   render() {
@@ -35,7 +40,7 @@ class Welcome extends React.Component {
             <input className="standard-input" value={this.state.id} onChange={this.onChange} onKeyPress={this.onKeyPress} />
           </div>
           <div>
-            <button onClick={() => this.props.goto(this.state.id)}>Save</button>
+            <button onClick={this.goto}>Save</button>
           </div>
         </div>
       </div>

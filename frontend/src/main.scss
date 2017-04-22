@@ -1,2 +1,43 @@
 .main {
+  width: 100%;
+  .title {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+  }
+
+  .note {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    .default-checkbox {
+      flex: 0 0 auto;
+    }
+    input {
+      flex: 1 0 auto;
+      padding-top: 10px;
+      font-size: 1.2em;
+    }
+    .delete-button {
+
+      flex: 0 0 auto;
+    }
+  }
+
+  .bottom {
+    width: calc(100% - 20px);
+    position: absolute;
+    bottom: 0px;
+    background: white;
+
+    button,
+    button:active,
+    button:focus {
+      width: 50%;
+    }
+    //button.button-add {
+    //}
+    //button.button-save {
+    //}
+  }
 }
