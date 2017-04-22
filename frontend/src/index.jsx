@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 
 import store from './store';
+import Welcome from './welcome';
 import Main from './main';
 
 // Load global css rules before our Main component, so we can overwrite them in our components
@@ -17,6 +18,7 @@ const content = document.getElementById('content');
 
 const MyRouter = () => (
   <Router history={browserHistory}>
+    <Route path="/" component={Welcome} />
     <Route path="/:noteid" component={Main} />
   </Router>
 );
