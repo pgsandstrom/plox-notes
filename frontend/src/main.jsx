@@ -27,7 +27,7 @@ class Main extends React.Component {
               editNote={text => this.props.editNote(index, text)}
             />)}
           <div className="bottom">
-            <button className="normalize-button standard-button button-add" onClick={this.props.addNote}>add</button>
+            <button className="normalize-button standard-button button-add" onClick={this.props.addNote}>Add</button>
             <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>Save</button>
           </div>
         </div>
