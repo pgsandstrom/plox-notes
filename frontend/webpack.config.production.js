@@ -21,6 +21,13 @@ module.exports = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
+      },
       { test: /\.woff$/, use: 'url-loader?limit=10000&minetype=application/font-woff' },
       { test: /\.ttf$/, use: 'file-loader' },
       { test: /\.eot$/, use: 'file-loader' },
