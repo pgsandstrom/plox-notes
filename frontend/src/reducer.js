@@ -8,12 +8,13 @@ const initialState = {
     text: 'laddar...',
     checked: false,
   }],
+  newNoteIndex: -1,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD:
-      return { ...state, notes: [...state.notes, { text: '', checked: false }] };
+      return update({ ...state, newNoteIndex: action.payload.index }, { notes: { $splice: [[action.payload.index, 0, { text: '', checked: false }]] } });
     case REMOVE:
       return update(state, { notes: { $splice: [[action.payload.index, 1]] } });
     case SWITCH_CHECK: {

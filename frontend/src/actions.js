@@ -1,10 +1,13 @@
 import { ADD, REMOVE, SWITCH_CHECK, EDIT_NOTE, LOAD_NOTE, SAVE_NOTE } from './constants';
 
-export const addNote = () => (dispatch) => {
+export const addNote = index => (dispatch) => {
   dispatch({
     type: ADD,
+    payload: {
+      index,
+    },
   });
-  setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0); // Scroll to bottom
+  // setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0); // Scroll to bottom
 };
 
 export const removeNote = index => ({
