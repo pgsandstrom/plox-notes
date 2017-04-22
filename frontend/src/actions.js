@@ -1,8 +1,11 @@
 import { ADD, REMOVE, SWITCH_CHECK, EDIT_NOTE, LOAD_NOTE, SAVE_NOTE } from './constants';
 
-export const addNote = () => ({
-  type: ADD,
-});
+export const addNote = () => (dispatch) => {
+  dispatch({
+    type: ADD,
+  });
+  setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0); // Scroll to bottom
+};
 
 export const removeNote = index => ({
   type: REMOVE,

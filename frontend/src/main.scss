@@ -1,37 +1,43 @@
 .main {
+  display: flex;
+  flex-direction: column;
   width: 400px;
+  height: 100%;
   margin: 0 auto;
 
   .title {
+    flex: 0 0 auto;
     width: 100%;
     text-align: center;
     font-size: 2em;
   }
 
-  .note {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    margin: 10px 0px;
-    .default-checkbox {
-      flex: 0 0 auto;
-    }
-    input {
+  .notes {
+    flex: 1 0 auto;
+
+    .note {
       flex: 1 0 auto;
-      padding-top: 10px;
-      font-size: 1.2em;
-    }
-    .delete-button {
-      flex: 0 0 auto;
-      margin: 0px 4px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      margin: 10px 0px;
+      .default-checkbox {
+        flex: 0 0 auto;
+      }
+      input {
+        flex: 1 0 auto;
+        padding-top: 10px;
+        font-size: 1.2em;
+      }
+      .delete-button {
+        flex: 0 0 auto;
+        margin: 0px 4px;
+      }
     }
   }
 
   .bottom {
-    width: calc(100% - 20px);
-    position: absolute;
-    bottom: 0px;
-    left: 10px;
+    flex: 0 0 auto;
     background: white;
 
     button,

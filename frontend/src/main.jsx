@@ -17,15 +17,17 @@ class Main extends React.Component {
       <div className="react-root">
         <div className="main">
           <div className="title">{this.props.params.noteid}</div>
-          {this.props.notes.map((note, index) =>
-            <Note
-              key={index}
-              text={note.text}
-              checked={note.checked}
-              switchChecked={() => this.props.switchChecked(index)}
-              delete={() => this.props.removeNote(index)}
-              editNote={text => this.props.editNote(index, text)}
-            />)}
+          <div className="notes">
+            {this.props.notes.map((note, index) =>
+              <Note
+                key={index}
+                text={note.text}
+                checked={note.checked}
+                switchChecked={() => this.props.switchChecked(index)}
+                delete={() => this.props.removeNote(index)}
+                editNote={text => this.props.editNote(index, text)}
+              />)}
+          </div>
           <div className="bottom">
             <button className="normalize-button standard-button button-add" onClick={this.props.addNote}>Add</button>
             <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>Save</button>
