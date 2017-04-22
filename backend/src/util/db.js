@@ -21,6 +21,13 @@ if (fs.existsSync(dbconfigPath)) {
 console.log('creating pool');
 export const db = new Pool(config);
 
+db.query('SELECT 1337')
+  .then(() => console.log('database connection works!'))
+  .catch((err) => {
+    console.log('DB CONNECTION FAILED!');
+    throw err;
+  });
+
 // inspired by https://github.com/felixfbecker/node-sql-template-strings
 export const SQL = (parts, ...values) =>
   ({
