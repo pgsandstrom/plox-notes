@@ -1,5 +1,7 @@
 .main {
-  width: 100%;
+  width: 400px;
+  margin: 0 auto;
+
   .title {
     width: 100%;
     text-align: center;
@@ -10,6 +12,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    margin: 10px 0px;
     .default-checkbox {
       flex: 0 0 auto;
     }
@@ -19,8 +22,8 @@
       font-size: 1.2em;
     }
     .delete-button {
-
       flex: 0 0 auto;
+      margin: 0px 4px;
     }
   }
 
@@ -28,16 +31,14 @@
     width: calc(100% - 20px);
     position: absolute;
     bottom: 0px;
+    left: 10px;
     background: white;
 
     button,
     button:active,
     button:focus {
       width: 50%;
+      height: 50px;
     }
-    //button.button-add {
-    //}
-    //button.button-save {
-    //}
   }
 }
