@@ -21,7 +21,7 @@ class Welcome extends React.Component {
   onKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      const path = `/${id}`;
+      const path = `/${this.state.id}`;
       browserHistory.push(path);
     }
   }
