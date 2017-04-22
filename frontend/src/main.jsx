@@ -24,6 +24,7 @@ class Main extends React.Component {
                 text={note.text}
                 checked={note.checked}
                 switchChecked={() => this.props.switchChecked(index)}
+                addNote={this.props.addNote}
                 delete={() => this.props.removeNote(index)}
                 editNote={text => this.props.editNote(index, text)}
               />)}
@@ -48,16 +49,24 @@ Main.propTypes = {
   save: PropTypes.func,
 };
 
+const onEnter = (e, func) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    func();
+  }
+};
+
 const Note = props => (
   <div className="note">
     <CheckBox checked={props.checked} checkCb={props.switchChecked} />
-    <input className="standard-input" value={props.text} onChange={e => props.editNote(e.target.value)} />
+    <input className="standard-input" value={props.text} onChange={e => props.editNote(e.target.value)} onKeyPress={e => onEnter(e, props.addNote)} />
     <button className="normalize-button standard-button delete-button" onClick={props.delete}>delete</button>
   </div>
 );
 Note.propTypes = {
   text: PropTypes.string,
   checked: PropTypes.bool,
+  addNote: PropTypes.func,
   delete: PropTypes.func,
   switchChecked: PropTypes.func,
   editNote: PropTypes.func,
