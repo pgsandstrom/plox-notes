@@ -47,7 +47,11 @@ class Main extends React.Component {
           </div>
           <div className="bottom">
             <button className="normalize-button standard-button button-add" onClick={() => this.props.addNote(this.props.notes.length)}>Add</button>
-            <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>Save</button>
+            <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>
+              Save
+              {this.props.saving && <span className="button-icon"><span className="fa fa-spinner fa-spin" /></span>}
+              {this.props.saved && <span className="button-icon"><span className="fa fa-check" /></span>}
+            </button>
           </div>
         </div>
       </div>
@@ -58,6 +62,8 @@ Main.propTypes = {
   params: PropTypes.object,
   notes: PropTypes.array,
   focusIndex: PropTypes.number,
+  saving: PropTypes.bool.isRequired,
+  saved: PropTypes.bool.isRequired,
   removeNote: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   addNote: PropTypes.func,
   switchChecked: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
@@ -152,6 +158,8 @@ Note.propTypes = {
 export default connect(state => ({
   notes: state.noteReducer.notes,
   focusIndex: state.noteReducer.focusIndex,
+  saving: state.noteReducer.saving,
+  saved: state.noteReducer.saved,
 }),
   {
     addNote,

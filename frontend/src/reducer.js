@@ -18,6 +18,8 @@ const initialState = {
     checked: false,
   }],
   focusIndex: -1,
+  saving: false,
+  saved: false,
 };
 
 export default (state = initialState, action) => {
@@ -41,8 +43,12 @@ export default (state = initialState, action) => {
       return update(state, { notes: { [action.payload.index]: { text: { $set: action.payload.text } } } });
     case fulfilled(LOAD_NOTE):
       return { ...state, notes: action.payload };
+    case pending(SAVE_NOTE):
+      return { ...state, saving: true, saved: false };
     case fulfilled(SAVE_NOTE):
-      return state; // TODO give feedback
+      return { ...state, saving: false, saved: true };
+    case rejected(SAVE_NOTE):
+      return { ...state, saving: false, saved: false };
     default:
       return state;
   }

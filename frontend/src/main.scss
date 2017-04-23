@@ -33,7 +33,7 @@
 
         &.crossed {
           color: $gray2;
-          text-decoration:line-through
+          text-decoration: line-through
         }
       }
       .delete-button {
@@ -52,6 +52,14 @@
     button:focus {
       width: 50%;
       height: 50px;
+    }
+
+    .button-icon {
+      display: inline-block;
+      width: 0px;
+      > span {
+        margin-left: 5px;
+      }
     }
   }
 }
