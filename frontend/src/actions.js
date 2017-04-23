@@ -3,6 +3,7 @@ import {
   REMOVE,
   SWITCH_CHECK,
   SET_FOCUS,
+  MOVE_NOTE,
   EDIT_NOTE,
   LOAD_NOTE,
   SAVE_NOTE,
@@ -36,6 +37,14 @@ export const setFocus = index => ({
   type: SET_FOCUS,
   payload: {
     index,
+  },
+});
+
+export const moveNote = (fromIndex, toIndex) => ({
+  type: MOVE_NOTE,
+  payload: {
+    fromIndex,
+    toIndex,
   },
 });
 

@@ -5,6 +5,7 @@ import {
   REMOVE,
   SWITCH_CHECK,
   SET_FOCUS,
+  MOVE_NOTE,
   EDIT_NOTE,
   LOAD_NOTE,
   SAVE_NOTE,
@@ -31,6 +32,11 @@ export default (state = initialState, action) => {
     }
     case SET_FOCUS:
       return { ...state, focusIndex: action.payload.index };
+    case MOVE_NOTE: {
+      const note = state.notes[action.payload.fromIndex];
+      const tempState = update(state, { notes: { $splice: [[action.payload.fromIndex, 1]] } });
+      return update(tempState, { notes: { $splice: [[action.payload.toIndex, 0, note]] } });
+    }
     case EDIT_NOTE:
       return update(state, { notes: { [action.payload.index]: { text: { $set: action.payload.text } } } });
     case fulfilled(LOAD_NOTE):

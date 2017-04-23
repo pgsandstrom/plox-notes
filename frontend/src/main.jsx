@@ -7,6 +7,7 @@ import {
   removeNote,
   switchChecked,
   setFocus,
+  moveNote,
   editNote,
   load,
   save } from './actions';
@@ -20,6 +21,8 @@ class Main extends React.Component {
   }
 
   render() {
+    const moveUncheckedToIndex = this.props.notes.filter(note => note.checked).length;
+    const moveCheckedToIndex = moveUncheckedToIndex - 1;
     return (
       <div className="react-root">
         <div className="main">
@@ -35,6 +38,7 @@ class Main extends React.Component {
                 focusIndex={this.props.focusIndex}
                 switchChecked={() => this.props.switchChecked(index)}
                 setFocus={this.props.setFocus}
+                moveNote={() => this.props.moveNote(index, note.checked ? moveCheckedToIndex : moveUncheckedToIndex)}
                 addNote={() => this.props.addNote(index + 1)}
                 delete={() => this.props.removeNote(index)}
                 editNote={text => this.props.editNote(index, text)}
@@ -57,6 +61,7 @@ Main.propTypes = {
   addNote: PropTypes.func,
   switchChecked: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   setFocus: PropTypes.func.isRequired,
+  moveNote: PropTypes.func.isRequired,
   editNote: PropTypes.func,
   load: PropTypes.func,
   save: PropTypes.func,
@@ -66,6 +71,7 @@ Main.propTypes = {
 class Note extends React.Component {
   constructor(props) {
     super(props);
+    this.onCheck = this.onCheck.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
   }
@@ -87,6 +93,11 @@ class Note extends React.Component {
     }
   }
 
+  onCheck() {
+    this.props.switchChecked();
+    this.props.moveNote();
+  }
+
   onKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -105,7 +116,7 @@ class Note extends React.Component {
   render() {
     return (
       <div className="note">
-        <CheckBox checked={this.props.checked} checkCb={this.props.switchChecked} />
+        <CheckBox checked={this.props.checked} checkCb={this.onCheck} />
         <input
           className="standard-input"
           value={this.props.text}
@@ -129,6 +140,7 @@ Note.propTypes = {
   delete: PropTypes.func,
   switchChecked: PropTypes.func,
   setFocus: PropTypes.func,
+  moveNote: PropTypes.func.isRequired,
   editNote: PropTypes.func,
 };
 
@@ -141,6 +153,7 @@ export default connect(state => ({
     removeNote,
     switchChecked,
     setFocus,
+    moveNote,
     editNote,
     load,
     save,
