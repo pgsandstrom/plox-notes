@@ -24,6 +24,7 @@ class Main extends React.Component {
                 text={note.text}
                 checked={note.checked}
                 index={index}
+                lastNote={index === this.props.notes.length - 1}
                 newNoteIndex={this.props.newNoteIndex}
                 switchChecked={() => this.props.switchChecked(index)}
                 addNote={() => this.props.addNote(index + 1)}
@@ -64,6 +65,9 @@ class Note extends React.Component {
     if (this.props.newNoteIndex === this.props.index) {
       this.textInput.focus();
     }
+    if (this.props.lastNote) {
+      this.textInput.focus();
+    }
   }
 
   componentDidUpdate() {
@@ -92,6 +96,7 @@ Note.propTypes = {
   text: PropTypes.string,
   checked: PropTypes.bool,
   index: PropTypes.number,
+  lastNote: PropTypes.number,
   newNoteIndex: PropTypes.number,
   addNote: PropTypes.func,
   delete: PropTypes.func,
