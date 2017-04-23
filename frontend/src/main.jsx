@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames/bind';
 
 import {
   addNote,
@@ -114,11 +115,15 @@ class Note extends React.Component {
   }
 
   render() {
+    const inputClass = classNames({
+      'standard-input': true,
+      crossed: this.props.checked,
+    });
     return (
       <div className="note">
         <CheckBox checked={this.props.checked} checkCb={this.onCheck} />
         <input
-          className="standard-input"
+          className={inputClass}
           value={this.props.text}
           onChange={e => this.props.editNote(e.target.value)}
           onKeyPress={e => this.onKeyPress(e)}

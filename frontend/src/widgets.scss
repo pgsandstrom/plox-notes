@@ -7,6 +7,10 @@ button.default-checkbox {
     width: 24px; // since checked and unchecked have different width
     padding: 0px 4px;
     text-align: left;
+
+    &.fa-check-square-o {
+      color: $gray;
+    }
   }
 }
 button.default-checkbox:focus {
