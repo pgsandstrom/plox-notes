@@ -1,4 +1,12 @@
-import { ADD, REMOVE, SWITCH_CHECK, EDIT_NOTE, LOAD_NOTE, SAVE_NOTE } from './constants';
+import {
+  ADD,
+  REMOVE,
+  SWITCH_CHECK,
+  SET_FOCUS,
+  EDIT_NOTE,
+  LOAD_NOTE,
+  SAVE_NOTE,
+} from './constants';
 
 export const addNote = index => (dispatch) => {
   dispatch({
@@ -19,6 +27,13 @@ export const removeNote = index => ({
 
 export const switchChecked = index => ({
   type: SWITCH_CHECK,
+  payload: {
+    index,
+  },
+});
+
+export const setFocus = index => ({
+  type: SET_FOCUS,
   payload: {
     index,
   },
