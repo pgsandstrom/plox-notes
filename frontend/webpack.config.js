@@ -58,6 +58,10 @@ module.exports = {
         secure: false,
         target: 'http://localhost:8088',
       },
+      '/socket.io/*': {
+        target: 'ws://localhost:8088',
+        ws: true,
+      },
     },
     historyApiFallback: true,
     host: '0.0.0.0',
