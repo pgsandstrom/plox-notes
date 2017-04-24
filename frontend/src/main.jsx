@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import FlipMove from 'react-flip-move';
 
-
+import { createWebsocket } from './websocket';
 import {
+  setId,
   addNote,
   removeNote,
   switchChecked,
@@ -13,7 +14,9 @@ import {
   moveNote,
   editNote,
   load,
+  setNotes,
   save,
+  setError,
 } from './actions';
 import { CheckBox } from './widgets';
 
@@ -21,7 +24,10 @@ import './main.scss';
 
 class Main extends React.Component {
   componentWillMount() {
+    this.props.setId(this.props.params.noteid);
     this.props.load(this.props.params.noteid);
+    createWebsocket(this.props.setId, this.props.setNotes, this.props.setError); // eslint-disable-line react/prop-types
+    // TODO also unmount websocket
   }
 
   render() {
@@ -73,6 +79,7 @@ Main.propTypes = {
   focusIndex: PropTypes.number,
   saving: PropTypes.bool.isRequired,
   saved: PropTypes.bool.isRequired,
+  setId: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
   removeNote: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   addNote: PropTypes.func,
   switchChecked: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
@@ -80,7 +87,9 @@ Main.propTypes = {
   moveNote: PropTypes.func.isRequired,
   editNote: PropTypes.func,
   load: PropTypes.func,
+  setNotes: PropTypes.func,
   save: PropTypes.func,
+  setError: PropTypes.func,
 };
 
 
@@ -173,6 +182,7 @@ export default connect(state => ({
   saved: state.noteReducer.saved,
 }),
   {
+    setId,
     addNote,
     removeNote,
     switchChecked,
@@ -180,5 +190,7 @@ export default connect(state => ({
     moveNote,
     editNote,
     load,
+    setNotes,
     save,
+    setError,
   })(Main);

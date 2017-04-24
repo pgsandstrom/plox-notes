@@ -48,6 +48,7 @@
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.3",
+    "socket.io-client": "^1.7.3",
     "style-loader": "~0.16.1",
     "url-loader": "^0.5.8",
     "whatwg-fetch": "^2.0.3"

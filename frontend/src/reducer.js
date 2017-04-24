@@ -1,6 +1,7 @@
 import update from 'immutability-helper';
 
 import {
+  SET_ID,
   ADD,
   REMOVE,
   SWITCH_CHECK,
@@ -8,11 +9,14 @@ import {
   MOVE_NOTE,
   EDIT_NOTE,
   LOAD_NOTE,
+  SET_NOTES,
   SAVE_NOTE,
+  SET_ERROR,
 } from './constants';
 import { pending, rejected, fulfilled } from './errorHandlerMiddleware';
 
 const initialState = {
+  id: '',
   notes: [{
     id: 'RANDOM',
     text: 'laddar...',
@@ -21,10 +25,13 @@ const initialState = {
   focusIndex: -1,
   saving: false,
   saved: false,
+  error: '',
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_ID:
+      return { ...state, id: action.payload.id };
     case ADD:
       return update({ ...state, focusIndex: action.payload.index }, { notes: { $splice: [[action.payload.index, 0, action.payload.note]] } });
     case REMOVE:
@@ -44,12 +51,16 @@ export default (state = initialState, action) => {
       return update(state, { notes: { [action.payload.index]: { text: { $set: action.payload.text } } } });
     case fulfilled(LOAD_NOTE):
       return { ...state, notes: action.payload };
+    case SET_NOTES:
+      return { ...state, notes: action.payload.data };
     case pending(SAVE_NOTE):
       return { ...state, saving: true, saved: false };
     case fulfilled(SAVE_NOTE):
       return { ...state, saving: false, saved: true };
     case rejected(SAVE_NOTE):
       return { ...state, saving: false, saved: false };
+    case SET_ERROR:
+      return { ...state, error: action.payload.text };
     default:
       return state;
   }

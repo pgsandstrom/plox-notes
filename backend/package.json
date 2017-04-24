@@ -16,7 +16,8 @@
     "node-fetch": "^1.6.3",
     "pg": "^6.1.4",
     "restify": "^4.3.0",
-    "restify-plugins": "^1.5.1"
+    "restify-plugins": "^1.5.1",
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

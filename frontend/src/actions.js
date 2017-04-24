@@ -1,4 +1,5 @@
 import {
+  SET_ID,
   ADD,
   REMOVE,
   SWITCH_CHECK,
@@ -6,8 +7,18 @@ import {
   MOVE_NOTE,
   EDIT_NOTE,
   LOAD_NOTE,
+  SET_NOTES,
   SAVE_NOTE,
+  SET_ERROR,
 } from './constants';
+import { sendEvent } from './websocket';
+
+export const setId = id => ({
+  type: SET_ID,
+  payload: {
+    id,
+  },
+});
 
 export const addNote = index => (dispatch) => {
   dispatch({
@@ -53,19 +64,28 @@ export const moveNote = (fromIndex, toIndex) => ({
   },
 });
 
-export const editNote = (index, text) => ({
-  type: EDIT_NOTE,
-  payload: {
-    index,
-    text,
-  },
-});
+export const editNote = (index, text) => (dispatch, getState) => {
+  dispatch({
+    type: EDIT_NOTE,
+    payload: {
+      index,
+      text,
+    },
+  });
+  sendEvent('post', { id: getState().noteReducer.id, notes: getState().noteReducer.notes });
+};
 
 export const load = id => ({
   type: LOAD_NOTE,
   payload: fetch(`/api/v1/note/${id}`, { credentials: 'same-origin' })
     .then(data => data.json()),
+});
 
+export const setNotes = data => ({
+  type: SET_NOTES,
+  payload: {
+    data,
+  },
 });
 
 export const save = (id, notes) => ({
@@ -75,4 +95,11 @@ export const save = (id, notes) => ({
     body: JSON.stringify(notes),
     credentials: 'same-origin',
   }),
+});
+
+export const setError = text => ({
+  type: SET_ERROR,
+  payload: {
+    text,
+  },
 });
