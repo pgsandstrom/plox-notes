@@ -9,6 +9,7 @@ export const createWebsocket = (setId, setNotes, setError) => {
   socket.on('connect', () => {
     // eslint-disable-next-line no-console
     console.log('connected to server');
+    setError('');
   });
   socket.on('load', (data) => {
     setId(data.id);
@@ -23,8 +24,6 @@ export const createWebsocket = (setId, setNotes, setError) => {
 export const getWebsocket = () => websocket;
 
 export const sendEvent = (event, content) => {
-  console.log('gonna send');
   websocket.emit(event, content, () => {
-    console.log('send completed');
   });
 };

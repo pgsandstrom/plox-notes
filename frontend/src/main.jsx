@@ -36,6 +36,7 @@ class Main extends React.Component {
     return (
       <div className="react-root">
         <div className="main">
+          {this.props.error !== '' && <div className="error">{this.props.error}</div>}
           <div className="title">{this.props.params.noteid}</div>
           <div className="notes">
             <FlipMove
@@ -79,6 +80,7 @@ Main.propTypes = {
   focusIndex: PropTypes.number,
   saving: PropTypes.bool.isRequired,
   saved: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
   setId: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
   removeNote: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   addNote: PropTypes.func,
@@ -180,6 +182,7 @@ export default connect(state => ({
   focusIndex: state.noteReducer.focusIndex,
   saving: state.noteReducer.saving,
   saved: state.noteReducer.saved,
+  error: state.noteReducer.error,
 }),
   {
     setId,
