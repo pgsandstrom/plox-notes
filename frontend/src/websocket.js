@@ -24,6 +24,5 @@ export const createWebsocket = (setId, setNotes, setError) => {
 export const getWebsocket = () => websocket;
 
 export const sendEvent = (event, content) => {
-  websocket.emit(event, content, () => {
-  });
+  websocket.emit(event, content, () => {});
 };

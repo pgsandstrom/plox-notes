@@ -13,12 +13,15 @@ import {
 } from './constants';
 import { sendEvent } from './websocket';
 
-export const setId = id => ({
-  type: SET_ID,
-  payload: {
-    id,
-  },
-});
+export const setId = id => (dispatch) => {
+  dispatch({
+    type: SET_ID,
+    payload: {
+      id,
+    },
+  });
+  sendEvent('setId', id);
+};
 
 export const addNote = index => (dispatch, getState) => {
   dispatch({

@@ -24,9 +24,10 @@ import './main.scss';
 
 class Main extends React.Component {
   componentWillMount() {
+    // Stupid design makes it so we must create websocket before setId, since that will trigger websocket event... think it over
+    createWebsocket(this.props.setId, this.props.setNotes, this.props.setError); // eslint-disable-line react/prop-types
     this.props.setId(this.props.params.noteid);
     this.props.load(this.props.params.noteid);
-    createWebsocket(this.props.setId, this.props.setNotes, this.props.setError); // eslint-disable-line react/prop-types
     // TODO also unmount websocket
   }
 
