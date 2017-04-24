@@ -20,7 +20,7 @@ export const setId = id => ({
   },
 });
 
-export const addNote = index => (dispatch) => {
+export const addNote = index => (dispatch, getState) => {
   dispatch({
     type: ADD,
     payload: {
@@ -32,22 +32,29 @@ export const addNote = index => (dispatch) => {
       },
     },
   });
+  uploadNotes(getState);
   // setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0); // Scroll to bottom
 };
 
-export const removeNote = index => ({
-  type: REMOVE,
-  payload: {
-    index,
-  },
-});
+export const removeNote = index => (dispatch, getState) => {
+  dispatch({
+    type: REMOVE,
+    payload: {
+      index,
+    },
+  });
+  uploadNotes(getState);
+};
 
-export const switchChecked = index => ({
-  type: SWITCH_CHECK,
-  payload: {
-    index,
-  },
-});
+export const switchChecked = index => (dispatch, getState) => {
+  dispatch({
+    type: SWITCH_CHECK,
+    payload: {
+      index,
+    },
+  });
+  uploadNotes(getState);
+};
 
 export const setFocus = index => ({
   type: SET_FOCUS,
@@ -56,13 +63,16 @@ export const setFocus = index => ({
   },
 });
 
-export const moveNote = (fromIndex, toIndex) => ({
-  type: MOVE_NOTE,
-  payload: {
-    fromIndex,
-    toIndex,
-  },
-});
+export const moveNote = (fromIndex, toIndex) => (dispatch, getState) => {
+  dispatch({
+    type: MOVE_NOTE,
+    payload: {
+      fromIndex,
+      toIndex,
+    },
+  });
+  uploadNotes(getState);
+};
 
 export const editNote = (index, text) => (dispatch, getState) => {
   dispatch({
@@ -72,7 +82,7 @@ export const editNote = (index, text) => (dispatch, getState) => {
       text,
     },
   });
-  sendEvent('post', { id: getState().noteReducer.id, notes: getState().noteReducer.notes });
+  uploadNotes(getState);
 };
 
 export const load = id => ({
@@ -103,3 +113,7 @@ export const setError = text => ({
     text,
   },
 });
+
+const uploadNotes = (getState) => {
+  sendEvent('post', { id: getState().noteReducer.id, notes: getState().noteReducer.notes });
+};
