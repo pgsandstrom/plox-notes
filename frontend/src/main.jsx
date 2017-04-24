@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import FlipMove from 'react-flip-move';
+
 
 import {
   addNote,
@@ -11,7 +13,8 @@ import {
   moveNote,
   editNote,
   load,
-  save } from './actions';
+  save,
+} from './actions';
 import { CheckBox } from './widgets';
 
 import './main.scss';
@@ -29,27 +32,33 @@ class Main extends React.Component {
         <div className="main">
           <div className="title">{this.props.params.noteid}</div>
           <div className="notes">
-            {this.props.notes.map((note, index) =>
-              <Note
-                key={note.id}
-                text={note.text}
-                checked={note.checked}
-                index={index}
-                lastNote={index === this.props.notes.length - 1}
-                focusIndex={this.props.focusIndex}
-                switchChecked={() => this.props.switchChecked(index)}
-                setFocus={this.props.setFocus}
-                moveNote={() => this.props.moveNote(index, note.checked ? moveCheckedToIndex : moveUncheckedToIndex)}
-                addNote={() => this.props.addNote(index + 1)}
-                delete={() => this.props.removeNote(index)}
-                editNote={text => this.props.editNote(index, text)}
-              />)}
+            <FlipMove
+              enterAnimation={false}
+              leaveAnimation={false}
+              duration={200}
+            >
+              {this.props.notes.map((note, index) =>
+                <Note
+                  key={note.id}
+                  text={note.text}
+                  checked={note.checked}
+                  index={index}
+                  lastNote={index === this.props.notes.length - 1}
+                  focusIndex={this.props.focusIndex}
+                  switchChecked={() => this.props.switchChecked(index)}
+                  setFocus={this.props.setFocus}
+                  moveNote={() => this.props.moveNote(index, note.checked ? moveCheckedToIndex : moveUncheckedToIndex)}
+                  addNote={() => this.props.addNote(index + 1)}
+                  delete={() => this.props.removeNote(index)}
+                  editNote={text => this.props.editNote(index, text)}
+                />)}
+            </FlipMove>
           </div>
           <div className="bottom">
             <button className="normalize-button standard-button button-add" onClick={() => this.props.addNote(this.props.notes.length)}>Add</button>
             <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>
-              Save
-              {this.props.saving && <span className="button-icon"><span className="fa fa-spinner fa-spin" /></span>}
+            Save
+            {this.props.saving && <span className="button-icon"><span className="fa fa-spinner fa-spin" /></span>}
               {this.props.saved && <span className="button-icon"><span className="fa fa-check" /></span>}
             </button>
           </div>
@@ -134,7 +143,9 @@ class Note extends React.Component {
           onChange={e => this.props.editNote(e.target.value)}
           onKeyPress={e => this.onKeyPress(e)}
           onKeyDown={e => this.onKeyDown(e)}
-          ref={(input) => { this.textInput = input; }}
+          ref={(input) => {
+            this.textInput = input;
+          }}
         />
         <button className="normalize-button standard-button delete-button" onClick={this.props.delete}>delete</button>
       </div>
