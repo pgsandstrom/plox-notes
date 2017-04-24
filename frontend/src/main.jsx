@@ -31,7 +31,7 @@ class Main extends React.Component {
           <div className="notes">
             {this.props.notes.map((note, index) =>
               <Note
-                key={index}
+                key={note.id}
                 text={note.text}
                 checked={note.checked}
                 index={index}

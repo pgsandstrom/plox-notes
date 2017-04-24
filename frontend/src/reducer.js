@@ -14,6 +14,7 @@ import { pending, rejected, fulfilled } from './errorHandlerMiddleware';
 
 const initialState = {
   notes: [{
+    id: 'RANDOM',
     text: 'laddar...',
     checked: false,
   }],
@@ -25,7 +26,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD:
-      return update({ ...state, focusIndex: action.payload.index }, { notes: { $splice: [[action.payload.index, 0, { text: '', checked: false }]] } });
+      return update({ ...state, focusIndex: action.payload.index }, { notes: { $splice: [[action.payload.index, 0, action.payload.note]] } });
     case REMOVE:
       return update(state, { notes: { $splice: [[action.payload.index, 1]] } });
     case SWITCH_CHECK: {

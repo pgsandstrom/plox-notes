@@ -14,6 +14,11 @@ export const addNote = index => (dispatch) => {
     type: ADD,
     payload: {
       index,
+      note: {
+        id: Math.random().toString(36).substr(2, 6),
+        text: '',
+        checked: false,
+      },
     },
   });
   // setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0); // Scroll to bottom
