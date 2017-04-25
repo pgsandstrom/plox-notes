@@ -10,7 +10,7 @@ export default (io) => {
     socket.on('setId', (noteId) => {
       activeSockets[socket.id].noteId = noteId;
     });
-    socket.on('post', (data) => {
+    socket.on('post', (data, fn) => {
       const { id, notes } = data;
       save(id, notes);
       Object.keys(activeSockets)
@@ -18,6 +18,7 @@ export default (io) => {
         .filter(socketId => activeSockets[socketId].noteId === id) // Remove users in other notes
         .map(socketId => activeSockets[socketId].socket)
         .forEach(otherSocket => otherSocket.emit('load', { id, notes }));
+      fn('ok');
     });
     socket.on('disconnect', () => {
       delete activeSockets[socket.id];

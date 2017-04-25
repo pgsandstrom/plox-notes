@@ -66,7 +66,7 @@ class Main extends React.Component {
             <button className="normalize-button standard-button button-add" onClick={() => this.props.addNote(this.props.notes.length)}>Add</button>
             <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>
             Save
-            {this.props.saving && <span className="button-icon"><span className="fa fa-spinner fa-spin" /></span>}
+            {this.props.ongoingSaves > 0 && <span className="button-icon"><span className="fa fa-spinner fa-spin" /></span>}
               {this.props.saved && <span className="button-icon"><span className="fa fa-check" /></span>}
             </button>
           </div>
@@ -79,7 +79,7 @@ Main.propTypes = {
   params: PropTypes.object,
   notes: PropTypes.array,
   focusIndex: PropTypes.number,
-  saving: PropTypes.bool.isRequired,
+  ongoingSaves: PropTypes.number.isRequired,
   saved: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   setId: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
@@ -181,7 +181,7 @@ Note.propTypes = {
 export default connect(state => ({
   notes: state.noteReducer.notes,
   focusIndex: state.noteReducer.focusIndex,
-  saving: state.noteReducer.saving,
+  ongoingSaves: state.noteReducer.ongoingSaves,
   saved: state.noteReducer.saved,
   error: state.noteReducer.error,
 }),

@@ -12,6 +12,7 @@ import {
   SET_ERROR,
 } from './constants';
 import { sendEvent } from './websocket';
+import { pending, fulfilled } from './errorHandlerMiddleware';
 
 export const setId = id => (dispatch) => {
   dispatch({
@@ -23,7 +24,7 @@ export const setId = id => (dispatch) => {
   sendEvent('setId', id);
 };
 
-export const addNote = index => (dispatch, getState) => {
+export const addNote = index => (dispatch) => {
   dispatch({
     type: ADD,
     payload: {
@@ -35,28 +36,28 @@ export const addNote = index => (dispatch, getState) => {
       },
     },
   });
-  uploadNotes(getState);
+  dispatch(uploadNotes());
   // setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0); // Scroll to bottom
 };
 
-export const removeNote = index => (dispatch, getState) => {
+export const removeNote = index => (dispatch) => {
   dispatch({
     type: REMOVE,
     payload: {
       index,
     },
   });
-  uploadNotes(getState);
+  dispatch(uploadNotes());
 };
 
-export const switchChecked = index => (dispatch, getState) => {
+export const switchChecked = index => (dispatch) => {
   dispatch({
     type: SWITCH_CHECK,
     payload: {
       index,
     },
   });
-  uploadNotes(getState);
+  dispatch(uploadNotes());
 };
 
 export const setFocus = index => ({
@@ -66,7 +67,7 @@ export const setFocus = index => ({
   },
 });
 
-export const moveNote = (fromIndex, toIndex) => (dispatch, getState) => {
+export const moveNote = (fromIndex, toIndex) => (dispatch) => {
   dispatch({
     type: MOVE_NOTE,
     payload: {
@@ -74,10 +75,10 @@ export const moveNote = (fromIndex, toIndex) => (dispatch, getState) => {
       toIndex,
     },
   });
-  uploadNotes(getState);
+  dispatch(uploadNotes());
 };
 
-export const editNote = (index, text) => (dispatch, getState) => {
+export const editNote = (index, text) => (dispatch) => {
   dispatch({
     type: EDIT_NOTE,
     payload: {
@@ -85,7 +86,7 @@ export const editNote = (index, text) => (dispatch, getState) => {
       text,
     },
   });
-  uploadNotes(getState);
+  dispatch(uploadNotes());
 };
 
 export const load = id => ({
@@ -117,6 +118,15 @@ export const setError = text => ({
   },
 });
 
-const uploadNotes = (getState) => {
-  sendEvent('post', { id: getState().noteReducer.id, notes: getState().noteReducer.notes });
+const uploadNotes = () => (dispatch, getState) => {
+  dispatch({
+    type: pending(SAVE_NOTE),
+  });
+  const cb = () => { // TODO can this callback detect errors?
+    console.log('hej');
+    dispatch({
+      type: fulfilled(SAVE_NOTE),
+    });
+  };
+  sendEvent('post', { id: getState().noteReducer.id, notes: getState().noteReducer.notes }, cb);
 };

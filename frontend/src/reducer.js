@@ -23,7 +23,7 @@ const initialState = {
     checked: false,
   }],
   focusIndex: -1,
-  saving: false,
+  ongoingSaves: 0,
   saved: false,
   error: '',
 };
@@ -54,11 +54,11 @@ export default (state = initialState, action) => {
     case SET_NOTES:
       return { ...state, notes: action.payload.data };
     case pending(SAVE_NOTE):
-      return { ...state, saving: true, saved: false };
+      return { ...state, ongoingSaves: state.ongoingSaves + 1, saved: false };
     case fulfilled(SAVE_NOTE):
-      return { ...state, saving: false, saved: true };
+      return { ...state, ongoingSaves: state.ongoingSaves - 1, saved: true };
     case rejected(SAVE_NOTE):
-      return { ...state, saving: false, saved: false };
+      return { ...state, ongoingSaves: state.ongoingSaves - 1, saved: false };
     case SET_ERROR:
       return { ...state, error: action.payload.text };
     default:
