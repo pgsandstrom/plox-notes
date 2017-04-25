@@ -39,29 +39,29 @@ class Main extends React.Component {
         <div className="main">
           {this.props.error !== '' && <div className="error">{this.props.error}</div>}
           <div className="title">{this.props.params.noteid}</div>
-          <div className="notes">
-            <FlipMove
-              enterAnimation={false}
-              leaveAnimation={false}
-              duration={200}
-            >
-              {this.props.notes.map((note, index) =>
-                <Note
-                  key={note.id}
-                  text={note.text}
-                  checked={note.checked}
-                  index={index}
-                  lastNote={index === this.props.notes.length - 1}
-                  focusIndex={this.props.focusIndex}
-                  switchChecked={() => this.props.switchChecked(index)}
-                  setFocus={this.props.setFocus}
-                  moveNote={() => this.props.moveNote(index, note.checked ? moveCheckedToIndex : moveUncheckedToIndex)}
-                  addNote={() => this.props.addNote(index + 1)}
-                  delete={() => this.props.removeNote(index)}
-                  editNote={text => this.props.editNote(index, text)}
-                />)}
-            </FlipMove>
-          </div>
+          <FlipMove
+            className="notes"
+            enterAnimation={false}
+            leaveAnimation={false}
+            duration={200}
+          >
+            <div className="grower" />
+            {this.props.notes.map((note, index) =>
+              <Note
+                key={note.id}
+                text={note.text}
+                checked={note.checked}
+                index={index}
+                lastNote={index === this.props.notes.length - 1}
+                focusIndex={this.props.focusIndex}
+                switchChecked={() => this.props.switchChecked(index)}
+                setFocus={this.props.setFocus}
+                moveNote={() => this.props.moveNote(index, note.checked ? moveCheckedToIndex : moveUncheckedToIndex)}
+                addNote={() => this.props.addNote(index + 1)}
+                delete={() => this.props.removeNote(index)}
+                editNote={text => this.props.editNote(index, text)}
+              />)}
+          </FlipMove>
           <div className="bottom">
             <button className="normalize-button standard-button button-add" onClick={() => this.props.addNote(this.props.notes.length)}>Add</button>
             <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>
