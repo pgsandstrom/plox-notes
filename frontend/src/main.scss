@@ -27,8 +27,10 @@
     flex-direction: column;
     flex: 1 0 auto;
 
-    .grower {
-      flex: 1 0 auto;
+    @media (max-width: 600px) {
+      .grower {
+        flex: 1 0 auto;
+      }
     }
 
     .note {
