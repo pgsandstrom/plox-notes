@@ -17,11 +17,7 @@ import { pending, rejected, fulfilled } from './errorHandlerMiddleware';
 
 const initialState = {
   id: '',
-  notes: [{
-    id: 'RANDOM',
-    text: 'laddar...',
-    checked: false,
-  }],
+  notes: [],
   focusIndex: -1,
   ongoingSaves: 0,
   saved: false,

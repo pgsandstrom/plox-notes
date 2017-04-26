@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { db, SQL } from '../util/db';
 
 export const load = id =>
@@ -6,7 +7,11 @@ export const load = id =>
       if (cursor.rows.length === 1) {
         return cursor.rows[0].data;
       } else {
-        return [];
+        return [{
+          id: crypto.randomBytes(3).toString('hex'),
+          text: '',
+          checked: false,
+        }];
       }
     });
 
