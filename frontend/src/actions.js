@@ -30,7 +30,7 @@ export const addNote = index => (dispatch) => {
     payload: {
       index,
       note: {
-        id: Math.random().tostring(36).substr(2, 6),
+        id: Math.random().toString(36).substr(2, 6),
         text: '',
         checked: false,
       },
