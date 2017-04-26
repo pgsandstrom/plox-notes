@@ -32,6 +32,9 @@ class Main extends React.Component {
   }
 
   render() {
+    if (this.props.loading) {
+      return null;
+    }
     const moveUncheckedToIndex = this.props.notes.filter(note => note.checked).length;
     const moveCheckedToIndex = moveUncheckedToIndex - 1;
     return (
@@ -80,6 +83,7 @@ Main.propTypes = {
   notes: PropTypes.array,
   focusIndex: PropTypes.number,
   ongoingSaves: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
   saved: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   setId: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
@@ -181,6 +185,7 @@ Note.propTypes = {
 export default connect(state => ({
   notes: state.noteReducer.notes,
   focusIndex: state.noteReducer.focusIndex,
+  loading: state.noteReducer.loading,
   ongoingSaves: state.noteReducer.ongoingSaves,
   saved: state.noteReducer.saved,
   error: state.noteReducer.error,
