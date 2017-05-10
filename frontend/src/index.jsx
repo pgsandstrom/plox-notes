@@ -33,6 +33,16 @@ ReactDOM.render(
   content,
 );
 
+window.addEventListener('beforeunload', (e) => {
+  if (store.getState().ongoingSaves > 0) {
+    const confirmationMessage = 'Maybe everything is not saved ;_;';
+    (e || window.event).returnValue = confirmationMessage;
+    return confirmationMessage;
+  } else {
+    return null;
+  }
+});
+
 // Hotswap in changes:
 if (module.hot) {
   module.hot.accept('./main', () => {
