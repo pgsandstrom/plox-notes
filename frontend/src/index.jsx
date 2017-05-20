@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
-import 'normalize.css';
+import 'font-awesome/scss/font-awesome.scss';
 
 import store from './store';
 
