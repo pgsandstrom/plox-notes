@@ -11,9 +11,9 @@ if (fs.existsSync(dbconfigPath)) {
 } else {
   console.log('dbconfig not found, falling back to dev settings');
   config = {
-    host: 'localhost',
+    host: '52.23.249.41',
     user: 'postgres',
-    password: 'abc123',
+    password: 'f348%rn1Hkh4',
     database: 'ploxnotes',
   };
 }
