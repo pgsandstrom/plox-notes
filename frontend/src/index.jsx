@@ -8,6 +8,7 @@ import 'normalize.css';
 import store from './store';
 
 // Load global css rules before our Main component, so we can overwrite them in our components
+import '../css/reset.scss';
 import '../css/global.scss';
 import '../css/_util_global.scss';
 import '../css/styles.scss';
