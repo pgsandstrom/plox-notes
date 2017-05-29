@@ -18,7 +18,8 @@
     "frontend",
     "cool"
   ],
-  "author": "Per Sandstrom",
+  "author": "Per Sandström",
+  "license": "ISC",
   "bugs": {
     "url": "TODO"
   },

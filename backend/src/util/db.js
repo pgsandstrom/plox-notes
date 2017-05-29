@@ -3,19 +3,15 @@ import fs from 'fs';
 
 const Pool = require('pg').Pool;
 
-const dbconfigPath = '/srv/bos.se/dbconfig.json';
+const dbconfigPath = '/apps/PloxNotes/dbconfig.json';
+const dbconfigDevPath = 'dbconfig.dev.json';
 
 let config;
 if (fs.existsSync(dbconfigPath)) {
   config = JSON.parse(fs.readFileSync(dbconfigPath, 'utf8'));
 } else {
   console.log('dbconfig not found, falling back to dev settings');
-  config = {
-    host: '52.23.249.41',
-    user: 'postgres',
-    password: 'f348%rn1Hkh4',
-    database: 'ploxnotes',
-  };
+  config = JSON.parse(fs.readFileSync(dbconfigDevPath, 'utf8'));
 }
 
 console.log('creating pool');

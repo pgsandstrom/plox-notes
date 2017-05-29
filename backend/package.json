@@ -10,6 +10,8 @@
     "prestart": "npm run -s build",
     "lint": "node ./node_modules/eslint/bin/eslint.js --ext .js --ext .jsx src"
   },
+  "author": "Per Sandström",
+  "license": "WTFPL",
   "dependencies": {
     "btoa": "^1.1.2",
     "crypto": "0.0.3",
