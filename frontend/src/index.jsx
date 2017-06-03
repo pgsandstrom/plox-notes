@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { Route } from 'react-router';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 import 'font-awesome/scss/font-awesome.scss';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 import store from './store';
 
@@ -18,17 +19,18 @@ import Main from './main';
 
 const content = document.getElementById('content');
 
-const MyRouter = () => (
-  <Router history={browserHistory}>
-    <Route path="/" component={Welcome} />
+const App = () =>
+  <Switch>
+    <Route exact path="/" component={Welcome} />
     <Route path="/:noteid" component={Main} />
-  </Router>
-);
+  </Switch>;
 
 ReactDOM.render(
   <AppContainer>
     <Provider store={store}>
-      <MyRouter />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </AppContainer>,
   content,

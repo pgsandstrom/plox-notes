@@ -26,8 +26,8 @@ class Main extends React.Component {
   componentWillMount() {
     // Stupid design makes it so we must create websocket before setId, since that will trigger websocket event... think it over
     createWebsocket(this.props.setId, this.props.setNotes, this.props.setError); // eslint-disable-line react/prop-types
-    this.props.setId(this.props.params.noteid);
-    this.props.load(this.props.params.noteid);
+    this.props.setId(this.props.match.params.noteid);
+    this.props.load(this.props.match.params.noteid);
     // TODO also unmount websocket
   }
 
@@ -37,11 +37,12 @@ class Main extends React.Component {
     }
     const moveUncheckedToIndex = this.props.notes.filter(note => note.checked).length;
     const moveCheckedToIndex = moveUncheckedToIndex - 1;
+    const noteid = this.props.match.params.noteid;
     return (
       <div className="react-root">
         <div className="main">
           {this.props.error !== '' && <div className="error">{this.props.error}</div>}
-          <div className="title">{this.props.params.noteid}</div>
+          <div className="title">{noteid}</div>
           <FlipMove
             className="notes"
             enterAnimation={false}
@@ -67,7 +68,7 @@ class Main extends React.Component {
           </FlipMove>
           <div className="bottom">
             <button className="normalize-button standard-button button-add" onClick={() => this.props.addNote(this.props.notes.length)}>Add</button>
-            <button className="normalize-button standard-button button-save" onClick={() => this.props.save(this.props.params.noteid, this.props.notes)}>
+            <button className="normalize-button standard-button button-save" onClick={() => this.props.save(noteid, this.props.notes)}>
             Save
             {this.props.ongoingSaves > 0 && <span className="button-icon"><span className="fa fa-spinner fa-spin" /></span>}
               {this.props.saved && <span className="button-icon"><span className="fa fa-check" /></span>}
@@ -79,7 +80,7 @@ class Main extends React.Component {
   }
 }
 Main.propTypes = {
-  params: PropTypes.object,
+  match: PropTypes.object,
   notes: PropTypes.array,
   focusIndex: PropTypes.number,
   ongoingSaves: PropTypes.number.isRequired,
