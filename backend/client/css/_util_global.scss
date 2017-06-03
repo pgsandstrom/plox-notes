@@ -1,0 +1,45 @@
+// This file is temporary until node-sass v4.0.0. See comment in _util.scss
+
+ul.normalize-list, ol.normalize-list {
+  -moz-padding-start: 0;
+  -webkit-padding-start: 0;
+  padding: 0;
+  margin-bottom: 0;
+  li {
+    display: block;
+  }
+}
+
+button.normalize-button,
+button.normalize-button:focus,
+button.normalize-button:active {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+}
+
+// This is needed to prevent "click"-effect from IE11
+button.normalize-button > * {
+  position: relative;
+}
+
+a.normalize-link:focus,
+a.normalize-link:hover {
+  text-decoration: none;
+}
+
+select.normalize-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+  option:first-child {
+    display: none;
+  }
+}

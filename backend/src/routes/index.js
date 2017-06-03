@@ -1,6 +1,8 @@
+import client from './client';
 import note from './note';
 
 export default (server) => {
+  client(server);
   note(server);
 
   server.get('/api/v1', (req, res, next) => {
