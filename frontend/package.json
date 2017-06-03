@@ -1,28 +1,16 @@
 {
   "name": "ploxnotes-frontend",
-  "version": "0.0.0",
-  "description": "A cool note app",
+  "version": "1.0.0",
+  "description": "",
   "main": "src/entry.jsx",
-  "directories": {},
   "scripts": {
     "test": "mocha --compilers scss:./test/null-compiler test/.setup.js test/**/*-test.js*",
     "lint": "node ./node_modules/eslint/bin/eslint.js --ext .js --ext .jsx src",
     "dev": "webpack-dev-server",
     "prod": "webpack --config webpack.config.production.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "TODO git path"
-  },
-  "keywords": [
-    "frontend",
-    "cool"
-  ],
   "author": "Per Sandström",
-  "license": "ISC",
-  "bugs": {
-    "url": "TODO"
-  },
+  "license": "WTFPL",
   "dependencies": {
     "babel-core": "~6.24.1",
     "babel-loader": "~6.4.1",
