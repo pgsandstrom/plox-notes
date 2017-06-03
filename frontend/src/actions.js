@@ -113,9 +113,16 @@ export const save = (id, notes) => ({
 });
 
 export const setError = (text, message, code) => (dispatch) => {
-  console.log(`Error text: ${text}`); // eslint-disable-line no-console
-  console.log(`Error message: ${message}`); // eslint-disable-line no-console
-  console.log(`Error code: ${code}`); // eslint-disable-line no-console
+  if (text !== '' && text != null) {
+    console.log(`Error text: ${text}`); // eslint-disable-line no-console
+  }
+  if (message !== '' && message != null) {
+    console.log(`Error message: ${message}`); // eslint-disable-line no-console
+  }
+  if (code !== 0 && code != null) {
+    console.log(`Error code: ${code}`); // eslint-disable-line no-console
+  }
+
   dispatch({
     type: SET_ERROR,
     payload: {
