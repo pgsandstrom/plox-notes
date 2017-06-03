@@ -1,4 +1,4 @@
-// import { raiseError } from './actions';
+import { setError } from './actions';
 
 // eslint-disable-next-line no-unused-vars
 export const errorHandlerMiddleware = store => next => (action) => {
@@ -7,17 +7,32 @@ export const errorHandlerMiddleware = store => next => (action) => {
     (action.meta == null || !action.meta.ignoreError) &&
     !action.type.includes('redux-form')
   ) {
-    // TODO
     if (action.payload) {
       if (action.payload instanceof Error) {
-        // store.dispatch(raiseError('Ett fel har inträffat', 'Ett okänt fel har inträffat', action.payload.message, 0));
+        store.dispatch(
+          setError('Ett okänt fel har inträffat', action.payload.message, 0),
+        );
       } else if (typeof action.payload === 'object') {
-        // store.dispatch(raiseError('Ett fel har inträffat', `${action.payload.name} kunde inte hämtas`, action.payload.error, action.payload.code));
+        store.dispatch(
+          setError(
+            `${action.payload.name} kunde inte hämtas`,
+            action.payload.error,
+            action.payload.code,
+          ),
+        );
       } else if (action.payload.name) {
-        // store.dispatch(raiseError('Ett fel har inträffat', `${action.payload.name} kunde inte hämtas`, action.payload.error, action.payload.code));
+        store.dispatch(
+          setError(
+            `${action.payload.name} kunde inte hämtas`,
+            action.payload.error,
+            action.payload.code,
+          ),
+        );
       }
     } else {
-      // store.dispatch(raiseError('Ett fel har inträffat', 'Ett okänt fel har inträffat', action.payload.message, 0));
+      store.dispatch(
+        setError('Ett okänt fel har inträffat', action.payload.message, 0),
+      );
     }
   }
   return next(action);
