@@ -124,8 +124,7 @@ const uploadNotes = () => (dispatch, getState) => {
     type: pending(SAVE_NOTE),
   });
   const cb = () => {
-    // TODO can this callback detect errors?
-    console.log('hej');
+    // Can this callback detect errors? Seems like "no"
     dispatch({
       type: fulfilled(SAVE_NOTE),
     });
