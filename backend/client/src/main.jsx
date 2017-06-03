@@ -20,21 +20,19 @@ import {
 } from './actions';
 import { CheckBox } from './widgets';
 
+// TODO gotta use this shit: https://github.com/kriasoft/isomorphic-style-loader#getting-started
 import './main.scss';
 
 class Main extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
+    // "DidMount" makes it so the server doesnt render it lolz
     // Stupid design makes it so we must create websocket before setId, since that will trigger websocket event... think it over
-    if (window) {
-      createWebsocket(
-        this.props.setId,
-        this.props.setNotes,
-        this.props.setError,
-      ); // eslint-disable-line react/prop-types
-      this.props.setId(this.props.params.noteid);
-      this.props.load(this.props.params.noteid);
-      // TODO also unmount websocket
-    }
+    // if (window) {
+    createWebsocket(this.props.setId, this.props.setNotes, this.props.setError); // eslint-disable-line react/prop-types
+    this.props.setId(this.props.match.params.noteid);
+    this.props.load(this.props.match.params.noteid);
+    // TODO also unmount websocket
+    // }
   }
 
   render() {
@@ -44,12 +42,13 @@ class Main extends React.Component {
     const moveUncheckedToIndex = this.props.notes.filter(note => note.checked)
       .length;
     const moveCheckedToIndex = moveUncheckedToIndex - 1;
+    const noteid = this.props.match.params.noteid;
     return (
       <div className="react-root">
         <div className="main">
           {this.props.error !== '' &&
             <div className="error">{this.props.error}</div>}
-          <div className="title">{this.props.params.noteid}</div>
+          <div className="title">{noteid}</div>
           <FlipMove
             className="notes"
             enterAnimation={false}
@@ -87,8 +86,7 @@ class Main extends React.Component {
             </button>
             <button
               className="normalize-button standard-button button-save"
-              onClick={() =>
-                this.props.save(this.props.params.noteid, this.props.notes)}
+              onClick={() => this.props.save(noteid, this.props.notes)}
             >
               Save
               {this.props.ongoingSaves > 0 &&
@@ -107,7 +105,7 @@ class Main extends React.Component {
   }
 }
 Main.propTypes = {
-  params: PropTypes.object,
+  match: PropTypes.object,
   notes: PropTypes.array,
   focusIndex: PropTypes.number,
   ongoingSaves: PropTypes.number.isRequired,

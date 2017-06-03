@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 
 import './main.scss';
 
@@ -28,7 +27,7 @@ class Welcome extends React.Component {
 
   goto() {
     const path = `/${this.state.id}`;
-    browserHistory.push(path);
+    this.props.history.push(path);
   }
 
   render() {
@@ -48,6 +47,7 @@ class Welcome extends React.Component {
   }
 }
 Welcome.propTypes = {
+  history: PropTypes.object.isRequired,
   goto: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
 };
 

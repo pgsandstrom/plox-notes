@@ -1,16 +1,56 @@
 import React from 'react';
+import restify from 'restify';
 import ReactDOMServer from 'react-dom/server';
+import { StaticRouter, matchPath } from 'react-router';
 
 import App from './../../client/src/app';
 
+const routes = ['/', '/:noteId'];
+// const routes = [];
+
 export default (server) => {
-  server.get('/', (req, res, next) => {
-    // eslint-disable-next-line react/jsx-filename-extension
+  server.get(/\/static\/?.*/, restify.serveStatic({
+    // directory: __dirname,
+    directory: 'public',
+    // directory: '',
+    // directory: '/home/pers/projects/PloxNotes/backend/dist/public', //TODO
+  }));
+  server.get('/:noteid', (req, res, next) => {
     try {
-      
-      const reactHtml = ReactDOMServer.renderToString(<App />);
-      // TODO format html? Keep in file?
-      const html = `
+      const match = routes.reduce(
+        (acc, route) => matchPath(req.url, route, { exact: true }) || acc,
+        null,
+      );
+      if (!match) {
+        res.send(404, '404 noob');
+        return;
+      }
+      const reactHtml = ReactDOMServer.renderToString(
+        <StaticRouter context={{}} location={req.url}>
+          <App />
+        </StaticRouter>,
+      );
+      console.log(`url: ${req.url}`);
+      console.log(`react html: ${reactHtml}`);
+      const html = renderHtml(reactHtml);
+      // res.setHeader('content-type', 'text/html; charset=UTF-8');
+      res.setHeader('content-type', 'text/html');
+      res.writeHead(200, {
+        'Content-Length': Buffer.byteLength(html),
+        'Content-Type': 'text/html',
+      });
+      res.write(html);
+      res.end();
+      next();
+    } catch (e) {
+      console.log(e.message);
+      console.log(e.stack);
+      res.send(e.stack);
+    }
+  });
+};
+
+const renderHtml = reactHtml => `
       <!DOCTYPE html>
       <html lang="sv">
       <head>
@@ -37,15 +77,6 @@ export default (server) => {
       </head>
       <body>
       <div id="content">${reactHtml}</div>
-      <script src="/assets/bundle_dev.js"></script>
+      <script src="/static/client.bundle.js"></script>
       </body>
       </html>`;
-      res.send(html);
-      next();
-    } catch (e) {
-      console.log(`error: ${e}`);
-      console.log(`error: ${e.message}`);
-      console.log(`error: ${e.stack}`);
-    }
-  });
-};

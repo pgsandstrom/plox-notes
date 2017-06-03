@@ -48,8 +48,10 @@ const clientConfig = {
   devtool: 'source-map',
   entry: ['whatwg-fetch', 'babel-polyfill', './client/src/'],
   output: {
+    // publicPath: '/assets/',
+    // path: path.join(__dirname, '/assets/'),
     path: path.resolve(__dirname, 'dist'),
-    filename: 'public/client.bundle.js',
+    filename: 'public/static/client.bundle.js',
   },
   module: {
     rules: [
@@ -84,17 +86,17 @@ const clientConfig = {
   },
   plugins: [
     // Make react understand we are in production mode
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    // this makes webpacks -p flag redundant. Optimizes and minimizes
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: true,
-      },
-    }),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify('production'),
+    //   },
+    // }),
+    // // this makes webpacks -p flag redundant. Optimizes and minimizes
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: true,
+    //   },
+    // }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
