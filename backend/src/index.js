@@ -13,7 +13,6 @@ const server = restify.createServer();
 const io = socketio.listen(server.server);
 websocket(io);
 
-
 // restify cheat sheet: https://gist.github.com/LeCoupa/0664e885fd74152d1f90
 server.use(plugins.acceptParser(server.acceptable));
 server.use(plugins.queryParser());

@@ -91,8 +91,9 @@ export const editNote = (index, text) => (dispatch) => {
 
 export const load = id => ({
   type: LOAD_NOTE,
-  payload: fetch(`/api/v1/note/${id}`, { credentials: 'same-origin' })
-    .then(data => data.json()),
+  payload: fetch(`/api/v1/note/${id}`, {
+    credentials: 'same-origin',
+  }).then(data => data.json()),
 });
 
 export const setNotes = data => ({
@@ -122,11 +123,16 @@ const uploadNotes = () => (dispatch, getState) => {
   dispatch({
     type: pending(SAVE_NOTE),
   });
-  const cb = () => { // TODO can this callback detect errors?
+  const cb = () => {
+    // TODO can this callback detect errors?
     console.log('hej');
     dispatch({
       type: fulfilled(SAVE_NOTE),
     });
   };
-  sendEvent('post', { id: getState().noteReducer.id, notes: getState().noteReducer.notes }, cb);
+  sendEvent(
+    'post',
+    { id: getState().noteReducer.id, notes: getState().noteReducer.notes },
+    cb,
+  );
 };

@@ -1,8 +1,13 @@
 // import { raiseError } from './actions';
 
+// eslint-disable-next-line no-unused-vars
 export const errorHandlerMiddleware = store => next => (action) => {
-  if (action.error && (action.meta == null || !action.meta.ignoreError) && !action.type.includes('redux-form')) {
-    //TODO
+  if (
+    action.error &&
+    (action.meta == null || !action.meta.ignoreError) &&
+    !action.type.includes('redux-form')
+  ) {
+    // TODO
     if (action.payload) {
       if (action.payload instanceof Error) {
         // store.dispatch(raiseError('Ett fel har inträffat', 'Ett okänt fel har inträffat', action.payload.message, 0));
@@ -21,4 +26,3 @@ export const errorHandlerMiddleware = store => next => (action) => {
 export const pending = constant => `${constant}_PENDING`;
 export const fulfilled = constant => `${constant}_FULFILLED`;
 export const rejected = constant => `${constant}_REJECTED`;
-

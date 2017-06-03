@@ -17,7 +17,8 @@ if (fs.existsSync(dbconfigPath)) {
 console.log('creating pool');
 export const db = new Pool(config);
 
-db.query('SELECT 1337')
+db
+  .query('SELECT 1337')
   .then(() => console.log('database connection works!'))
   .catch((err) => {
     console.log('DB CONNECTION FAILED!');
@@ -25,9 +26,7 @@ db.query('SELECT 1337')
   });
 
 // inspired by https://github.com/felixfbecker/node-sql-template-strings
-export const SQL = (parts, ...values) =>
-  ({
-    text: parts.reduce((prev, curr, i) => prev + '$' + i + curr), // eslint-disable-line prefer-template
-    values,
-  });
-
+export const SQL = (parts, ...values) => ({
+  text: parts.reduce((prev, curr, i) => prev + '$' + i + curr), // eslint-disable-line prefer-template
+  values,
+});
