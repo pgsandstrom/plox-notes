@@ -6,7 +6,6 @@ export default (server) => {
     const id = req.params.noteid;
     load(id)
       .then((result) => {
-        res.setHeader('content-type', 'application/json'); // TODO do this in a cooler way
         res.send(result);
         next();
       })
