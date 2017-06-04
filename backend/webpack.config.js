@@ -48,10 +48,9 @@ const clientConfig = {
   devtool: 'source-map',
   entry: ['whatwg-fetch', 'babel-polyfill', './client/src/'],
   output: {
-    // publicPath: '/assets/',
-    // path: path.join(__dirname, '/assets/'),
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'public/static/client.bundle.js',
+    publicPath: '/static/',
+    path: path.resolve(__dirname, 'dist/public/static'),
+    filename: 'client.bundle.js',
   },
   module: {
     rules: [
