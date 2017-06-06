@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './main.scss';
+import style from './main.scss';
 
 class Welcome extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class Welcome extends React.Component {
   render() {
     return (
       <div className="react-root">
-        <div className="main-body">
+        <div className={style.main}>
           <div>Pls give the ID to your note (it will be public)</div>
           <div>
             <input className="standard-input" value={this.state.id} onChange={this.onChange} onKeyPress={this.onKeyPress} />

@@ -2,18 +2,19 @@ import React from 'react';
 import restify from 'restify';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router';
+import fs from 'fs';
 
 import App from './../../client/src/app';
 
 const routes = ['/', '/:noteId'];
-// const routes = [];
+
+const css = fs.readFileSync('./public/static/styles.css', 'utf8');
 
 export default (server) => {
   server.get(/\/static\/?.*/, restify.serveStatic({
+    // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
     // directory: __dirname,
     directory: 'public',
-    // directory: '',
-    // directory: '/home/pers/projects/PloxNotes/backend/dist/public', //TODO
   }));
   server.get('/:noteid', (req, res, next) => {
     try {
@@ -30,8 +31,8 @@ export default (server) => {
           <App />
         </StaticRouter>,
       );
-      console.log(`url: ${req.url}`);
-      console.log(`react html: ${reactHtml}`);
+      // console.log(`url: ${req.url}`);
+      // console.log(`react html: ${reactHtml}`);
       const html = renderHtml(reactHtml);
       // res.setHeader('content-type', 'text/html; charset=UTF-8');
       res.setHeader('content-type', 'text/html');
@@ -74,6 +75,7 @@ const renderHtml = reactHtml => `
       <meta name="msapplication-TileColor" content="#ffffff">
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
       <meta name="theme-color" content="#ffffff">
+      <style type="text/css">${css}</style>
       </head>
       <body>
       <div id="content">${reactHtml}</div>

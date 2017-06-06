@@ -1,6 +1,7 @@
 const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const serverConfig = {
   entry: ['./src/index.js'],
@@ -65,12 +66,18 @@ const clientConfig = {
         },
       },
       {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader',
+        }),
       },
       {
-        test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -96,6 +103,7 @@ const clientConfig = {
     //     warnings: true,
     //   },
     // }),
+    new ExtractTextPlugin('styles.css'),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
