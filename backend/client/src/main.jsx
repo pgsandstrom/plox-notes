@@ -36,9 +36,6 @@ class Main extends React.Component {
   }
 
   render() {
-    if (this.props.loading) {
-      return null;
-    }
     const moveUncheckedToIndex = this.props.notes.filter(note => note.checked)
       .length;
     const moveCheckedToIndex = moveUncheckedToIndex - 1;
@@ -56,6 +53,7 @@ class Main extends React.Component {
             duration={200}
           >
             <div className="grower" />
+            {this.props.loading && <span>loading...</span>}
             {this.props.notes.map((note, index) =>
               <Note
                 key={note.id}

@@ -11,11 +11,22 @@ const routes = ['/', '/:noteId'];
 const css = fs.readFileSync('./public/static/styles.css', 'utf8');
 
 export default (server) => {
-  server.get(/\/static\/?.*/, restify.serveStatic({
-    // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
-    // directory: __dirname,
-    directory: 'public',
-  }));
+  server.get(
+    /\/static\/?.*/,
+    restify.serveStatic({
+      // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
+      // directory: __dirname,
+      directory: 'public',
+    }),
+  );
+  server.get(
+    /.*(png|manifest.json)/,
+    restify.serveStatic({
+      // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
+      // directory: __dirname,
+      directory: 'public',
+    }),
+  );
   server.get('/:noteid', (req, res, next) => {
     try {
       const match = routes.reduce(
