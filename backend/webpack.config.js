@@ -1,4 +1,4 @@
-const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
+const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
