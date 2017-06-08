@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon src --debug=3001 --exec babel-node --presets es2015,stage-0",
+    "dev": "cross-env NODE_ENV=development nodemon src --debug=3001 --exec babel-node --presets react,es2015,stage-0",
     "build": "webpack",
     "lint": "node ./node_modules/eslint/bin/eslint.js --ext .js --ext .jsx src"
   },
