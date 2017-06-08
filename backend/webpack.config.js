@@ -25,11 +25,11 @@ const serverConfig = {
       },
       {
         test: /\.scss$/,
-        use: ['isomorphic-style-loader', 'css-loader', 'sass-loader'],
+        use: 'null-loader',
       },
       {
         test: /\.css$/,
-        use: [{ loader: 'isomorphic-style-loader' }, { loader: 'css-loader' }], // TODO skriv denna snyggare pa alla stallen
+        use: 'null-loader',
       },
     ],
   },
@@ -92,17 +92,17 @@ const clientConfig = {
   },
   plugins: [
     // Make react understand we are in production mode
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     NODE_ENV: JSON.stringify('production'),
-    //   },
-    // }),
-    // // this makes webpacks -p flag redundant. Optimizes and minimizes
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: true,
-    //   },
-    // }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    // this makes webpacks -p flag redundant. Optimizes and minimizes
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: true,
+      },
+    }),
     new ExtractTextPlugin('styles.css'),
   ],
   resolve: {

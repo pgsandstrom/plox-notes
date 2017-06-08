@@ -28,6 +28,7 @@
     "js-cookie": "^2.1.4",
     "node-fetch": "^1.6.3",
     "node-sass": "^4.5.2",
+    "null-loader": "^0.1.1",
     "pg": "^6.1.4",
     "prop-types": "^15.5.8",
     "react": "~15.5.4",
