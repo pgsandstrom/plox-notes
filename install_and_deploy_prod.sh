@@ -4,7 +4,7 @@ set -u
 
 cd "$(dirname "$0")"
 
-cd ./backend
+cd ./code
 npm install
 cd ..
 
