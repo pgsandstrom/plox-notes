@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "bos.se",
+      "script": "dist",
+      "args": [],
+      "watch": true,
+      "node_args": "--harmony",
+      "merge_logs": true,
+      "cwd": "/apps/bos.se",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

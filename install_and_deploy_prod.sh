@@ -4,13 +4,11 @@ set -u
 
 cd "$(dirname "$0")"
 
-cd ./frontend
-npm install
-cd ..
-
-
 cd ./backend
 npm install
 cd ..
 
-./deploy_prod.sh
+sudo cp -r ./backend/* /apps/bos.se
+cd /apps/bos.se
+npm run build
+pm2 restart bos.se
