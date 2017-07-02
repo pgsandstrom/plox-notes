@@ -2,12 +2,12 @@
   "apps": [
     {
       "name": "bos.se",
-      "script": "dist",
+      "script": ".",
       "args": [],
       "watch": true,
       "node_args": "--harmony",
-      "merge_logs": true,
-      "cwd": "/apps/bos.se",
+      "merge_logs": false,
+      "cwd": "/apps/bos.se/dist",
       "env": {
         "NODE_ENV": "production"
       }
