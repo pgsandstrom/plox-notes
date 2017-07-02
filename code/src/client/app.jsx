@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { Switch } from 'react-router-dom';
 
 // Load global css rules before our Main component, so we can overwrite them in our components
-import '../css/reset.scss';
-import '../css/global.scss';
-import '../css/_util_global.scss';
-import '../css/styles.scss';
+import './css/reset.scss';
+import './css/global.scss';
+import './css/_util_global.scss';
+import './css/styles.scss';
 
 import Welcome from './welcome';
 import Main from './main';

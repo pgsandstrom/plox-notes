@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './widgets.scss';
-import '../css/_util.scss';
+import './css/_util.scss';
 
 // eslint-disable-next-line import/prefer-default-export
 export const CheckBox = props => (

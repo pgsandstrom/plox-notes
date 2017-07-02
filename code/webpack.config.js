@@ -48,7 +48,7 @@ const serverConfig = {
 
 const clientConfig = {
   devtool: 'source-map',
-  entry: ['whatwg-fetch', 'babel-polyfill', './src/client/src/'],
+  entry: ['whatwg-fetch', 'babel-polyfill', './src/client/'],
   output: {
     publicPath: '/static/',
     path: path.resolve(__dirname, 'dist/public/static'),

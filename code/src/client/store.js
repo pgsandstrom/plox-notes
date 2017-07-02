@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import promiseMiddleware from 'redux-promise-middleware';
-import { errorHandlerMiddleware } from '../src/errorHandlerMiddleware';
+import { errorHandlerMiddleware } from './errorHandlerMiddleware';
 
 import rootReducer from './rootReducer';
 

@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router';
 import fs from 'fs';
 
-import App from '../client/src/app';
+import App from '../client/app';
 
 const routes = ['/', '/:noteId'];
 
