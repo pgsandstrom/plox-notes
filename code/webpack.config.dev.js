@@ -103,8 +103,7 @@ const clientConfig = {
     new ExtractTextPlugin('styles.css'),
     new CopyWebpackPlugin([
       { from: '../static/*', to: '.' },
-    ],
-      { copyUnmodified: true }),
+    ]),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
