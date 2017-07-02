@@ -18,6 +18,7 @@
     "babel-preset-airbnb": "^2.2.3",
     "btoa": "^1.1.2",
     "classnames": "^2.2.5",
+    "copy-webpack-plugin": "^4.0.1",
     "crypto": "0.0.3",
     "css-loader": "~0.28.0",
     "es6-promise": "~4.1.0",

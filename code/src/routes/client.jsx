@@ -19,12 +19,13 @@ export default (server) => {
       directory: 'public',
     }),
   );
+  // TODO perhaps simply check if the url matches one of our static files instead of that ugly regexp...
   server.get(
-    /.*(png|manifest.json)/,
+    /.*(.png|manifest.json|browserconfig.xml|favicon.ico)/,
     restify.serveStatic({
       // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
       // directory: __dirname,
-      directory: 'public',
+      directory: 'public/static',
     }),
   );
   server.get('/:noteid', (req, res, next) => {

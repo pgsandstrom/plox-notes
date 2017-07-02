@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const serverConfig = {
@@ -100,6 +101,10 @@ const clientConfig = {
       },
     }),
     new ExtractTextPlugin('styles.css'),
+    new CopyWebpackPlugin([
+      { from: '../static/*', to: '.' },
+    ],
+      { copyUnmodified: true }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
