@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "dev": "webpack --watch --config webpack.config.dev.js",
-    "run-dev": "cd devbuild && nodemon server.bundle.js",
+    "run-dev": "cd devbuild && nodemon .",
     "build": "webpack",
     "lint": "node ./node_modules/eslint/bin/eslint.js --ext .js --ext .jsx src"
   },

@@ -9,7 +9,7 @@ const serverConfig = {
   externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, 'devbuild'),
-    filename: 'server.bundle.js',
+    filename: 'index.js',
   },
   module: {
     rules: [
