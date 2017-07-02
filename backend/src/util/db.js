@@ -11,7 +11,12 @@ if (fs.existsSync(configPath)) {
   config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 } else {
   console.log('config not found, falling back to dev settings');
-  config = JSON.parse(fs.readFileSync(configDevPath, 'utf8'));
+  if (fs.existsSync(configDevPath)) {
+    config = JSON.parse(fs.readFileSync(configDevPath, 'utf8'));
+  } else {
+    console.log('dev settings not found, exiting');
+    throw new Error('dev settings not found, exiting');
+  }
 }
 
 console.log('creating pool');
