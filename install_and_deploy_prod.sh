@@ -8,7 +8,7 @@ cd ./code
 npm install
 cd ..
 
-sudo cp -r ./backend/* /apps/bos.se
+sudo cp -r ./code/* /apps/bos.se
 cd /apps/bos.se
 npm run build
 pm2 restart bos.se
