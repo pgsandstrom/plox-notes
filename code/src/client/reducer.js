@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
     case fulfilled(LOAD_NOTE):
       return { ...state, loading: false, notes: action.payload };
     case SET_NOTES:
-      return { ...state, notes: action.payload.data };
+      return { ...state, notes: action.payload.data, loading: false };
     case pending(SAVE_NOTE):
       return { ...state, ongoingSaves: state.ongoingSaves + 1, saved: false };
     case fulfilled(SAVE_NOTE):

@@ -1,4 +1,4 @@
-import { save } from './controller/note';
+import { save, load } from './controller/note';
 
 const activeSockets = {};
 
@@ -6,9 +6,12 @@ export default (io) => {
   // TODO really using the rest interface to update data should trigger all websockets to send out new data... but you know...
   io.sockets.on('connection', (socket) => {
     activeSockets[socket.id] = { noteId: '', socket };
-    // socket.emit('news', { hello: 'world' });
     socket.on('setId', (noteId) => {
       activeSockets[socket.id].noteId = noteId;
+      // When client clarifies who they are, send out the data to them!
+      load(noteId).then((notes) => {
+        socket.emit('load', { noteId, notes });
+      });
     });
     socket.on('post', (data, fn) => {
       const { id, notes } = data;

@@ -12,7 +12,6 @@ export const createWebsocket = (setId, setNotes, setError) => {
     setError('');
   });
   socket.on('load', (data) => {
-    setId(data.id);
     setNotes(data.notes);
   });
   // socket.on('connect_error', () => {

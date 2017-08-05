@@ -13,7 +13,6 @@ import {
   setFocus,
   moveNote,
   editNote,
-  load,
   setNotes,
   save,
   setError,
@@ -30,7 +29,6 @@ class Main extends React.Component {
     // if (window) {
     createWebsocket(this.props.setId, this.props.setNotes, this.props.setError); // eslint-disable-line react/prop-types
     this.props.setId(this.props.match.params.noteid);
-    this.props.load(this.props.match.params.noteid);
     // TODO also unmount websocket
     // }
   }
@@ -117,7 +115,6 @@ Main.propTypes = {
   setFocus: PropTypes.func.isRequired,
   moveNote: PropTypes.func.isRequired,
   editNote: PropTypes.func,
-  load: PropTypes.func,
   setNotes: PropTypes.func,
   save: PropTypes.func,
   setError: PropTypes.func,
@@ -228,7 +225,6 @@ export default connect(
     setFocus,
     moveNote,
     editNote,
-    load,
     setNotes,
     save,
     setError,

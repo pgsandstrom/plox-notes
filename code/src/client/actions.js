@@ -89,7 +89,7 @@ export const editNote = (index, text) => (dispatch) => {
   dispatch(uploadNotes());
 };
 
-export const load = id => ({
+export const loadThroughRest = id => ({
   type: LOAD_NOTE,
   payload: fetch(`/api/v1/note/${id}`, {
     credentials: 'same-origin',
