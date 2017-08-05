@@ -3,7 +3,7 @@ import { db, SQL } from '../util/db';
 
 export const load = id =>
   db.query('SELECT data FROM note WHERE id = $1', [id]).then((cursor) => {
-    if (cursor.rows.length === 1) {
+    if (cursor.rows.length > 0) {
       return cursor.rows[0].data;
     } else {
       return [
