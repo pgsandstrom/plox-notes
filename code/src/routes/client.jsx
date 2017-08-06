@@ -5,8 +5,11 @@ import { StaticRouter, matchPath } from 'react-router';
 import fs from 'fs';
 
 import App from '../client/app';
+import { load } from '../controller/note';
 
-const routes = ['/', '/:noteId'];
+const welcomeRoute = '/';
+const noteRoute = '/:noteId';
+const routes = [welcomeRoute, noteRoute];
 
 const css = fs.readFileSync('./public/static/styles.css', 'utf8');
 
@@ -38,29 +41,36 @@ export default (server) => {
         res.send(404, '404 noob');
         return;
       }
-      const reactHtml = ReactDOMServer.renderToString(
-        <StaticRouter context={{}} location={req.url}>
-          <App />
-        </StaticRouter>,
-      );
-      // console.log(`url: ${req.url}`);
-      // console.log(`react html: ${reactHtml}`);
-      const html = renderHtml(reactHtml);
-      // res.setHeader('content-type', 'text/html; charset=UTF-8');
-      res.setHeader('content-type', 'text/html');
-      res.writeHead(200, {
-        'Content-Length': Buffer.byteLength(html),
-        'Content-Type': 'text/html',
-      });
-      res.write(html);
-      res.end();
-      next();
+      if (matchPath(req.url, noteRoute, { exact: true })) {
+        const id = req.params.noteid;
+        load(id).then(notes => fixStuff(req, res, next, notes));
+      } else {
+        fixStuff(req, res, next);
+      }
     } catch (e) {
       console.log(e.message); // eslint-disable-line no-console
       console.log(e.stack); // eslint-disable-line no-console
       res.send(e.stack);
     }
   });
+};
+
+const fixStuff = (req, res, next, notes) => {
+  console.log(`fixstuff ${JSON.stringify(notes)}`);
+  const reactHtml = ReactDOMServer.renderToString(
+    <StaticRouter context={{}} location={req.url}>
+      <App initNotes={notes} />
+    </StaticRouter>,
+  );
+  const html = renderHtml(reactHtml);
+  res.setHeader('content-type', 'text/html');
+  res.writeHead(200, {
+    'Content-Length': Buffer.byteLength(html),
+    'Content-Type': 'text/html',
+  });
+  res.write(html);
+  res.end();
+  next();
 };
 
 const renderHtml = reactHtml => `

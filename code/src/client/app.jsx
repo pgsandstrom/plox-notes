@@ -14,15 +14,15 @@ import Main from './main';
 import store from './store';
 
 
-const MyRouter = () =>
+const MyRouter = props =>
   (<Switch>
-    <Route exact path="/" component={Welcome} />
-    <Route path="/:noteid" component={Main} />
+    <Route exact path="/" component={props2 => <Welcome {...props} {...props2} />} />
+    <Route path="/:noteid" component={props2 => <Main {...props} {...props2} />} />
   </Switch>);
 
-const App = () =>
+const App = props =>
   (<Provider store={store}>
-    <MyRouter />
+    <MyRouter {...props} />
   </Provider>);
 
 export default App;

@@ -34,7 +34,8 @@ class Main extends React.Component {
   }
 
   render() {
-    const moveUncheckedToIndex = this.props.notes.filter(note => note.checked)
+    const notes = this.props.initNotes || this.props.notes;
+    const moveUncheckedToIndex = notes.filter(note => note.checked)
       .length;
     const moveCheckedToIndex = moveUncheckedToIndex - 1;
     const noteid = this.props.match.params.noteid;
@@ -52,13 +53,13 @@ class Main extends React.Component {
           >
             <div className="grower" />
             {this.props.loading && <span>loading...</span>}
-            {this.props.notes.map((note, index) =>
+            {notes.map((note, index) =>
               (<Note
                 key={note.id}
                 text={note.text}
                 checked={note.checked}
                 index={index}
-                lastNote={index === this.props.notes.length - 1}
+                lastNote={index === notes.length - 1}
                 focusIndex={this.props.focusIndex}
                 switchChecked={() => this.props.switchChecked(index)}
                 setFocus={this.props.setFocus}
@@ -76,13 +77,13 @@ class Main extends React.Component {
           <div className="bottom">
             <button
               className="normalize-button standard-button button-add"
-              onClick={() => this.props.addNote(this.props.notes.length)}
+              onClick={() => this.props.addNote(notes.length)}
             >
               Add
             </button>
             <button
               className="normalize-button standard-button button-save"
-              onClick={() => this.props.save(noteid, this.props.notes)}
+              onClick={() => this.props.save(noteid, notes)}
             >
               Save
               {this.props.ongoingSaves > 0 &&
@@ -103,6 +104,7 @@ class Main extends React.Component {
 Main.propTypes = {
   match: PropTypes.object,
   notes: PropTypes.array,
+  initNotes: PropTypes.array,
   focusIndex: PropTypes.number,
   ongoingSaves: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
