@@ -13,7 +13,7 @@ const css = fs.readFileSync('./public/static/styles.css', 'utf8');
 export default (server) => {
   server.get(
     /\/static\/?.*/,
-    restify.serveStatic({
+    restify.plugins.serveStatic({
       // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
       // directory: __dirname,
       directory: 'public',
@@ -22,7 +22,7 @@ export default (server) => {
   // TODO perhaps simply check if the url matches one of our static files instead of that ugly regexp...
   server.get(
     /.*(.png|manifest.json|browserconfig.xml|favicon.ico)/,
-    restify.serveStatic({
+    restify.plugins.serveStatic({
       // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
       // directory: __dirname,
       directory: 'public/static',

@@ -1,4 +1,5 @@
 const restify = require('restify');
+const restifyErrors = require('restify-errors');
 const util = require('util');
 
 function GenericError(data, errorCodeExplicit, statusCode) {
@@ -33,5 +34,5 @@ function GenericError(data, errorCodeExplicit, statusCode) {
   });
   this.name = 'GenericError';
 }
-util.inherits(GenericError, restify.RestError);
+util.inherits(GenericError, restifyErrors.RestError);
 export default GenericError;
