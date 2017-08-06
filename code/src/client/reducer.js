@@ -8,7 +8,6 @@ import {
   SET_FOCUS,
   MOVE_NOTE,
   EDIT_NOTE,
-  LOAD_NOTE,
   SET_NOTES,
   SAVE_NOTE,
   SET_ERROR,
@@ -19,7 +18,6 @@ const initialState = {
   id: '',
   notes: [],
   focusIndex: -1,
-  loading: true,
   ongoingSaves: 0,
   saved: false,
   error: '',
@@ -61,12 +59,8 @@ export default (state = initialState, action) => {
           [action.payload.index]: { text: { $set: action.payload.text } },
         },
       });
-    case pending(LOAD_NOTE):
-      return { ...state, loading: true };
-    case fulfilled(LOAD_NOTE):
-      return { ...state, loading: false, notes: action.payload };
     case SET_NOTES:
-      return { ...state, notes: action.payload.data, loading: false };
+      return { ...state, notes: action.payload.data };
     case pending(SAVE_NOTE):
       return { ...state, ongoingSaves: state.ongoingSaves + 1, saved: false };
     case fulfilled(SAVE_NOTE):

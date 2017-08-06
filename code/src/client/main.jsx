@@ -52,7 +52,6 @@ class Main extends React.Component {
             duration={200}
           >
             <div className="grower" />
-            {this.props.loading && <span>loading...</span>}
             {notes.map((note, index) =>
               (<Note
                 key={note.id}
@@ -107,7 +106,6 @@ Main.propTypes = {
   initNotes: PropTypes.array,
   focusIndex: PropTypes.number,
   ongoingSaves: PropTypes.number.isRequired,
-  loading: PropTypes.bool.isRequired,
   saved: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   setId: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
@@ -214,7 +212,6 @@ export default connect(
   state => ({
     notes: state.noteReducer.notes,
     focusIndex: state.noteReducer.focusIndex,
-    loading: state.noteReducer.loading,
     ongoingSaves: state.noteReducer.ongoingSaves,
     saved: state.noteReducer.saved,
     error: state.noteReducer.error,
