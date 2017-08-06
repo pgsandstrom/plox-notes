@@ -62,7 +62,7 @@ const fixStuff = (req, res, next, notes) => {
       <App initNotes={notes} />
     </StaticRouter>,
   );
-  const html = renderHtml(reactHtml);
+  const html = renderHtml(reactHtml, notes);
   res.setHeader('content-type', 'text/html');
   res.writeHead(200, {
     'Content-Length': Buffer.byteLength(html),
@@ -73,7 +73,7 @@ const fixStuff = (req, res, next, notes) => {
   next();
 };
 
-const renderHtml = reactHtml => `
+const renderHtml = (reactHtml, notes) => `
       <!DOCTYPE html>
       <html lang="sv">
       <head>
@@ -101,6 +101,7 @@ const renderHtml = reactHtml => `
       </head>
       <body>
       <div id="content">${reactHtml}</div>
+      <script>window.initNotes = ${JSON.stringify(notes)}</script>
       <script src="/static/client.bundle.js"></script>
       </body>
       </html>`;

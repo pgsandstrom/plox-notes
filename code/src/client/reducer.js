@@ -16,7 +16,7 @@ import { pending, rejected, fulfilled } from './errorHandlerMiddleware';
 
 const initialState = {
   id: '',
-  notes: [],
+  notes: (typeof window !== 'undefined' ? window.initNotes : []),
   focusIndex: -1,
   ongoingSaves: 0,
   saved: false,
