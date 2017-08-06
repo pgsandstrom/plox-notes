@@ -53,7 +53,7 @@ class Main extends React.Component {
             <div className="grower" />
             {this.props.loading && <span>loading...</span>}
             {this.props.notes.map((note, index) =>
-              <Note
+              (<Note
                 key={note.id}
                 text={note.text}
                 checked={note.checked}
@@ -70,7 +70,7 @@ class Main extends React.Component {
                 addNote={() => this.props.addNote(index + 1)}
                 delete={() => this.props.removeNote(index)}
                 editNote={text => this.props.editNote(index, text)}
-              />,
+              />),
             )}
           </FlipMove>
           <div className="bottom">

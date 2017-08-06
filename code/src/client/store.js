@@ -5,7 +5,7 @@ import { errorHandlerMiddleware } from './errorHandlerMiddleware';
 
 import rootReducer from './rootReducer';
 
-console.log('creating store');
+console.log('creating store'); // eslint-disable-line no-console
 const storeArguments = [rootReducer];
 if (typeof window !== 'undefined') {
   storeArguments.push(

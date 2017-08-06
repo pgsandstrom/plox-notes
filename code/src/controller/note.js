@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { db, SQL } from '../util/db';
+import { db } from '../util/db';
 
 export const load = id =>
   db.query('SELECT data FROM note WHERE id = $1', [id]).then((cursor) => {

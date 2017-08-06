@@ -15,14 +15,14 @@ import store from './store';
 
 
 const MyRouter = () =>
-  <Switch>
+  (<Switch>
     <Route exact path="/" component={Welcome} />
     <Route path="/:noteid" component={Main} />
-  </Switch>;
+  </Switch>);
 
 const App = () =>
-  <Provider store={store}>
+  (<Provider store={store}>
     <MyRouter />
-  </Provider>;
+  </Provider>);
 
 export default App;

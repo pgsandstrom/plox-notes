@@ -56,8 +56,8 @@ export default (server) => {
       res.end();
       next();
     } catch (e) {
-      console.log(e.message);
-      console.log(e.stack);
+      console.log(e.message); // eslint-disable-line no-console
+      console.log(e.stack); // eslint-disable-line no-console
       res.send(e.stack);
     }
   });
