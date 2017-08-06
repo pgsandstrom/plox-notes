@@ -24,13 +24,9 @@ import './main.scss';
 
 class Main extends React.Component {
   componentDidMount() {
-    // "DidMount" makes it so the server doesnt render it lolz
-    // Stupid design makes it so we must create websocket before setId, since that will trigger websocket event... think it over
-    // if (window) {
-    createWebsocket(this.props.setId, this.props.setNotes, this.props.setError); // eslint-disable-line react/prop-types
+    // "DidMount" makes it so the server doesnt run it
+    createWebsocket(this.props.setId, this.props.setNotes, this.props.setError);
     this.props.setId(this.props.match.params.noteid);
-    // TODO also unmount websocket
-    // }
   }
 
   render() {
