@@ -43,9 +43,9 @@ export default (server) => {
       }
       if (matchPath(req.url, noteRoute, { exact: true })) {
         const id = req.params.noteid;
-        load(id).then(notes => fixStuff(req, res, next, notes));
+        load(id).then(notes => sendServerSideRendering(req, res, next, notes));
       } else {
-        fixStuff(req, res, next);
+        sendServerSideRendering(req, res, next);
       }
     } catch (e) {
       console.log(e.message); // eslint-disable-line no-console
@@ -55,14 +55,13 @@ export default (server) => {
   });
 };
 
-const fixStuff = (req, res, next, notes) => {
-  console.log(`fixstuff ${JSON.stringify(notes)}`);
+const sendServerSideRendering = (req, res, next, notes) => {
   const reactHtml = ReactDOMServer.renderToString(
     <StaticRouter context={{}} location={req.url}>
       <App initNotes={notes} />
     </StaticRouter>,
   );
-  const html = renderHtml(reactHtml, notes);
+  const html = getHtml(reactHtml, notes);
   res.setHeader('content-type', 'text/html');
   res.writeHead(200, {
     'Content-Length': Buffer.byteLength(html),
@@ -73,7 +72,7 @@ const fixStuff = (req, res, next, notes) => {
   next();
 };
 
-const renderHtml = (reactHtml, notes) => `
+const getHtml = (reactHtml, notes) => `
       <!DOCTYPE html>
       <html lang="sv">
       <head>
