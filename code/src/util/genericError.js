@@ -1,6 +1,6 @@
-const restify = require('restify');
-const restifyErrors = require('restify-errors');
-const util = require('util');
+import restify from 'restify';
+import restifyErrors from 'restify-errors';
+import util from 'util';
 
 function GenericError(data, errorCodeExplicit, statusCode) {
   if (data instanceof Error) {

@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import fs from 'fs';
+import pg from 'pg';
 
-const Pool = require('pg').Pool;
+const Pool = pg.Pool;
 
 const configPath = '/apps/bos.se/config.json';
 const configDevPath = 'config.dev.json';
