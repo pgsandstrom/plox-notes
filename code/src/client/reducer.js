@@ -14,9 +14,10 @@ import {
 } from './constants';
 import { pending, rejected, fulfilled } from './errorHandlerMiddleware';
 
+// when do we have 'window' but 'window.initNotes' is undefined? That happens when we navigate to the note page from a page that didnt prefetch data.
 const initialState = {
   id: '',
-  notes: (typeof window !== 'undefined' ? window.initNotes : []),
+  notes: (typeof window !== 'undefined' && window.initNotes !== undefined ? window.initNotes : []),
   focusIndex: -1,
   ongoingSaves: 0,
   saved: false,
