@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Transition from 'react-transition-group/Transition';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import FlipMove from 'react-flip-move';
@@ -35,8 +36,33 @@ class Main extends React.Component {
       .length;
     const moveCheckedToIndex = moveUncheckedToIndex - 1;
     const noteid = this.props.match.params.noteid;
+
+    const duration = 200;
+    const defaultStyle = {
+      transition: `opacity ${duration}ms ease-in-out`,
+    };
+
+    const transitionStyles = {
+      exiting: { opacity: 0, pointerEvents: 'none' },
+      exited: { opacity: 0, pointerEvents: 'none' },
+    };
+
     return (
       <div className="react-root">
+        <Transition
+          in={this.props.notesLoaded === false}
+          timeout={duration}
+        >
+          {state => (
+            <div
+              className="disabler"
+              style={{
+                ...defaultStyle,
+                ...transitionStyles[state],
+              }}
+            />
+          )}
+        </Transition>
         <div className="main">
           {this.props.error !== '' &&
             <div className="error">{this.props.error}</div>}
@@ -104,6 +130,7 @@ Main.propTypes = {
   ongoingSaves: PropTypes.number.isRequired,
   saved: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
+  notesLoaded: PropTypes.bool.isRequired,
   setId: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
   removeNote: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   addNote: PropTypes.func,
@@ -211,6 +238,7 @@ export default connect(
     ongoingSaves: state.noteReducer.ongoingSaves,
     saved: state.noteReducer.saved,
     error: state.noteReducer.error,
+    notesLoaded: state.noteReducer.notesLoaded,
   }),
   {
     setId,

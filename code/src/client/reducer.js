@@ -22,6 +22,7 @@ const initialState = {
   ongoingSaves: 0,
   saved: false,
   error: '',
+  notesLoaded: false,
 };
 
 export default (state = initialState, action) => {
@@ -61,7 +62,7 @@ export default (state = initialState, action) => {
         },
       });
     case SET_NOTES:
-      return { ...state, notes: action.payload.data };
+      return { ...state, notes: action.payload.data, notesLoaded: true };
     case pending(SAVE_NOTE):
       return { ...state, ongoingSaves: state.ongoingSaves + 1, saved: false };
     case fulfilled(SAVE_NOTE):
