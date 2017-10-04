@@ -83,13 +83,21 @@ const clientConfig = {
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: 'url-loader?limit=10000&minetype=application/font-woff',
+        loader: 'url-loader?minetype=application/font-woff',
+        options: {
+          limit: 10000,
+        },
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: 'file-loader',
       },
-      { test: /\.(jpg|png)$/, use: 'url-loader?limit=25000' },
+      { test: /\.(jpg|png)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 25000,
+        },
+      },
     ],
   },
   plugins: [
