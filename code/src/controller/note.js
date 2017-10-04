@@ -26,6 +26,7 @@ export const save = (id, data) =>
         id,
       ]);
     } else {
+      console.log(`Creating note with id "${id}"`); // eslint-disable-line no-console
       return db.query('INSERT INTO note(id, data) VALUES($1, $2)', [
         id,
         JSON.stringify(data),
