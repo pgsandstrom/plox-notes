@@ -10,7 +10,7 @@ import store from './store';
 
 const content = document.getElementById('content');
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <AppContainer>
     <BrowserRouter>
       <App />
