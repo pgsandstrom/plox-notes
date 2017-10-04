@@ -8,6 +8,7 @@
       "node_args": "--harmony",
       "merge_logs": false,
       "cwd": "/apps/bos.se/dist",
+      "log_date_format" : "YYYY-MM-DD HH:mm:ss",
       "env": {
         "NODE_ENV": "production"
       }
