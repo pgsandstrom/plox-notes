@@ -16,6 +16,7 @@
     "babel-loader": "7.1.2",
     "babel-polyfill": "6.26.0",
     "babel-preset-airbnb": "2.4.0",
+    "classnames": "2.2.5",
     "copy-webpack-plugin": "4.2.0",
     "crypto": "1.0.1",
     "css-loader": "0.28.7",
