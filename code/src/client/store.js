@@ -12,7 +12,5 @@ if (typeof window !== 'undefined') {
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // eslint-disable-line no-underscore-dangle
   );
 }
-storeArguments.push(
-  applyMiddleware(thunk, promiseMiddleware(), errorHandlerMiddleware),
-);
+storeArguments.push(applyMiddleware(thunk, promiseMiddleware(), errorHandlerMiddleware));
 export default createStore(...storeArguments);

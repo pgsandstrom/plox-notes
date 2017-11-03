@@ -21,15 +21,9 @@ export const save = (id, data) =>
 
   db.query('SELECT data FROM note WHERE id = $1', [id]).then((result) => {
     if (result.rows.length > 0) {
-      return db.query('UPDATE note SET data=$1::jsonb WHERE id = $2', [
-        JSON.stringify(data),
-        id,
-      ]);
+      return db.query('UPDATE note SET data=$1::jsonb WHERE id = $2', [JSON.stringify(data), id]);
     } else {
       console.log(`Creating note with id "${id}"`); // eslint-disable-line no-console
-      return db.query('INSERT INTO note(id, data) VALUES($1, $2)', [
-        id,
-        JSON.stringify(data),
-      ]);
+      return db.query('INSERT INTO note(id, data) VALUES($1, $2)', [id, JSON.stringify(data)]);
     }
   });

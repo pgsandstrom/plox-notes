@@ -4,8 +4,7 @@ let serverUrl;
 export const getServerUrl = () => {
   if (serverUrl == null) {
     const port = location.port ? `:${location.port}` : '';
-    serverUrl = `${window.location.protocol}//${window.location
-      .hostname}${port}`;
+    serverUrl = `${window.location.protocol}//${window.location.hostname}${port}`;
   }
   return serverUrl;
 };
