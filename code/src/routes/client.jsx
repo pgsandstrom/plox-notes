@@ -14,23 +14,23 @@ const routes = [welcomeRoute, noteRoute];
 const css = fs.readFileSync('./public/static/styles.css', 'utf8');
 
 export default (server) => {
-  server.get(
-    /\/static\/?.*/,
-    restify.plugins.serveStatic({
-      // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
-      // directory: __dirname,
-      directory: 'public',
-    }),
-  );
-  // TODO perhaps simply check if the url matches one of our static files instead of that ugly regexp...
-  server.get(
-    /.*(.png|manifest.json|browserconfig.xml|favicon.ico)/,
-    restify.plugins.serveStatic({
-      // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
-      // directory: __dirname,
-      directory: 'public/static',
-    }),
-  );
+  // TODO since migration to restify 7 I have had some problem with routing.
+  // /apple gives ResourceNotFound for some reason. Dont quite understand which urls that result in an error.
+  // Seems rather arbritrary. I dont have the energy to fix it right now (;_;) I just want the cool new versions.
+
+  // we read all the static files and create a path for them
+  fs.readdir('public/static', (err, files) => {
+    files.forEach((file) => {
+      server.get(
+        `/${file}`,
+        restify.plugins.serveStatic({
+          // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
+          // directory: __dirname,
+          directory: 'public/static',
+        }),
+      );
+    });
+  });
   server.get('/:noteid', (req, res, next) => {
     try {
       const match = routes.reduce(
