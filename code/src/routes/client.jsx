@@ -18,7 +18,17 @@ export default (server) => {
   // /apple gives ResourceNotFound for some reason. Dont quite understand which urls that result in an error.
   // Seems rather arbritrary. I dont have the energy to fix it right now (;_;) I just want the cool new versions.
 
-  // we read all the static files and create a path for them
+  // the bundle and bundled stuff is found here (like fonts)
+  server.get(
+    '/static*',
+    restify.plugins.serveStatic({
+      // TODO currently we use the messy path public/static since webpack overwrites __dirname or something
+      // directory: __dirname,
+      directory: 'public',
+    }),
+  );
+
+  // we read all the static files and create a path for them. Its stuff like favicon.ico
   fs.readdir('public/static', (err, files) => {
     files.forEach((file) => {
       server.get(
