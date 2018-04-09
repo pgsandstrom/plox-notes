@@ -17,6 +17,7 @@ import {
   setNotes,
   save,
   setError,
+  undo,
 } from './actions';
 import { CheckBox } from './widgets';
 
@@ -103,6 +104,13 @@ class Main extends React.Component {
               Add
             </button>
             <button
+              className="normalize-button standard-button button-add"
+              onClick={() => this.props.undo()}
+              disabled={this.props.hasHistory === false}
+            >
+              Undo
+            </button>
+            <button
               className="normalize-button standard-button button-save"
               onClick={() => this.props.save(noteid, notes)}
             >
@@ -141,6 +149,8 @@ Main.propTypes = {
   setNotes: PropTypes.func,
   save: PropTypes.func,
   setError: PropTypes.func,
+  undo: PropTypes.func,
+  hasHistory: PropTypes.bool,
 };
 
 class Note extends React.Component {
@@ -239,6 +249,7 @@ export default connect(
     saved: state.noteReducer.saved,
     error: state.noteReducer.error,
     notesLoaded: state.noteReducer.notesLoaded,
+    hasHistory: state.noteReducer.history.length > 0,
   }),
   {
     setId,
@@ -251,5 +262,6 @@ export default connect(
     setNotes,
     save,
     setError,
+    undo,
   },
 )(Main);

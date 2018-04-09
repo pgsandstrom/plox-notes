@@ -8,3 +8,4 @@ export const EDIT_NOTE = 'note/EDIT_NOTE';
 export const SET_NOTES = 'note/SET_NOTES';
 export const SAVE_NOTE = 'note/SAVE_NOTE';
 export const SET_ERROR = 'note/SET_ERROR';
+export const UNDO = 'note/UNDO';

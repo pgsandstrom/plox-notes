@@ -83,13 +83,14 @@ html {
       }
 
       .bottom {
+        display: flex;
         flex: 0 0 auto;
         background: white;
 
         button,
         button:active,
         button:focus {
-          width: 50%;
+          flex: 1 0 0%;
           height: 50px;
         }
 

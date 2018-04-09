@@ -11,6 +11,7 @@ import {
   SET_NOTES,
   SAVE_NOTE,
   SET_ERROR,
+  UNDO,
 } from './constants';
 import { pending, rejected, fulfilled } from './errorHandlerMiddleware';
 
@@ -18,6 +19,7 @@ import { pending, rejected, fulfilled } from './errorHandlerMiddleware';
 const initialState = {
   id: '',
   notes: typeof window !== 'undefined' && window.initNotes !== undefined ? window.initNotes : [],
+  history: [],
   focusIndex: -1,
   ongoingSaves: 0,
   saved: false,
@@ -32,16 +34,25 @@ export default (state = initialState, action) => {
     case ADD:
       return update(
         { ...state, focusIndex: action.payload.index },
-        { notes: { $splice: [[action.payload.index, 0, action.payload.note]] } },
+        {
+          notes: { $splice: [[action.payload.index, 0, action.payload.note]] },
+          history: { $push: [state.notes] },
+        },
       );
     case REMOVE:
-      return update(state, { notes: { $splice: [[action.payload.index, 1]] } });
+      return update(state,
+        {
+          notes: { $splice: [[action.payload.index, 1]] },
+          history: { $push: [state.notes] },
+        },
+      );
     case SWITCH_CHECK: {
       const currentChecked = state.notes[action.payload.index].checked;
       return update(state, {
         notes: {
           [action.payload.index]: { checked: { $set: !currentChecked } },
         },
+        history: { $push: [state.notes] },
       });
     }
     case SET_FOCUS:
@@ -53,13 +64,16 @@ export default (state = initialState, action) => {
       });
       return update(tempState, {
         notes: { $splice: [[action.payload.toIndex, 0, note]] },
+        history: { $push: [state.notes] },
       });
     }
     case EDIT_NOTE:
+      console.log(JSON.stringify(state));
       return update(state, {
         notes: {
           [action.payload.index]: { text: { $set: action.payload.text } },
         },
+        history: { $push: [state.notes] },
       });
     case SET_NOTES:
       return { ...state, notes: action.payload.data, notesLoaded: true };
@@ -71,6 +85,11 @@ export default (state = initialState, action) => {
       return { ...state, ongoingSaves: state.ongoingSaves - 1, saved: false };
     case SET_ERROR:
       return { ...state, error: action.payload.text };
+    case UNDO:
+      return { ...state,
+        notes: state.history[state.history.length - 1],
+        history: state.history.slice(0, -1),
+      };
     default:
       return state;
   }

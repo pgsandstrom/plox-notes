@@ -10,6 +10,7 @@ import {
   SET_NOTES,
   SAVE_NOTE,
   SET_ERROR,
+  UNDO,
 } from './constants';
 import { sendEvent } from './websocket';
 import { pending, fulfilled } from './errorHandlerMiddleware';
@@ -85,6 +86,13 @@ export const editNote = (index, text) => (dispatch) => {
       index,
       text,
     },
+  });
+  dispatch(uploadNotes());
+};
+
+export const undo = () => (dispatch) => {
+  dispatch({
+    type: UNDO,
   });
   dispatch(uploadNotes());
 };
