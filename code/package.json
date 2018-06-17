@@ -27,7 +27,7 @@
     "immutability-helper": "2.4.0",
     "isomorphic-style-loader": "4.0.0",
     "node-fetch": "1.7.3",
-    "node-sass": "4.5.3",
+    "node-sass": "4.9.0",
     "null-loader": "0.1.1",
     "pg": "7.4.1",
     "prop-types": "15.6.0",

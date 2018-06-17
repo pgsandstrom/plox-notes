@@ -32,7 +32,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const notes = this.props.initNotes || this.props.notes;
+    const notes = this.props.initNotes || this.props.notes || [];
     const moveUncheckedToIndex = notes.filter(note => note.checked)
       .length;
     const moveCheckedToIndex = moveUncheckedToIndex - 1;
