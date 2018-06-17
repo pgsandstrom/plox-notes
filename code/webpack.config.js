@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const serverConfig = {
+  mode: 'production',
   entry: ['./src/index.js'],
   target: 'node',
   externals: [nodeExternals()],
@@ -100,18 +101,6 @@ const clientConfig = {
     ],
   },
   plugins: [
-    // Make react understand we are in production mode
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    // this makes webpacks -p flag redundant. Optimizes and minimizes
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: true,
-      },
-    }),
     new ExtractTextPlugin('styles.css'),
     new CopyWebpackPlugin([
       { from: '../static/*', to: '.' },

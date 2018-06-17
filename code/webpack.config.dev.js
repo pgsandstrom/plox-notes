@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const serverConfig = {
+  mode: 'development',
   entry: ['./src/index.js'],
   target: 'node',
   externals: [nodeExternals()],
@@ -103,11 +104,6 @@ const clientConfig = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     // Make react understand we are in dev mode
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-      },
-    }),
     new ExtractTextPlugin('styles.css'),
     new CopyWebpackPlugin([
       { from: '../static/*', to: '.' },
