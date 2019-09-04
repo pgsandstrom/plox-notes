@@ -5,11 +5,12 @@ import { getServerUrl } from './backend';
 
 let websocket;
 
-export const createWebsocket = (setId, setNotes, setError) => {
+export const createWebsocket = (setIdNoParams, setNotes, setError) => {
   const socket = socketio(getServerUrl());
   socket.on('connect', () => {
     console.log('connected to server');
     setError('');
+    setIdNoParams()
   });
   socket.on('connect_error', () => {
     setError('Connect error');

@@ -27,8 +27,8 @@ import './main.scss';
 class Main extends React.Component {
   componentDidMount() {
     // "DidMount" makes it so the server doesnt run it
-    createWebsocket(this.props.setId, this.props.setNotes, this.props.setError);
-    this.props.setId(this.props.match.params.noteid);
+    createWebsocket(() => this.props.setId(this.props.match.params.noteid), this.props.setNotes, this.props.setError);
+    // this.props.setId(this.props.match.params.noteid);
   }
 
   render() {
