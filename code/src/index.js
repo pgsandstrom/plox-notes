@@ -17,6 +17,7 @@ websocket(io);
 server.use(plugins.acceptParser(server.acceptable));
 server.use(plugins.queryParser());
 server.use(plugins.bodyParser());
+server.use(plugins.gzipResponse());
 server.use(encodeUtf8Plugin());
 
 server.get('/api/echo/:name', (req, res, next) => {
