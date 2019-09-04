@@ -11,17 +11,29 @@ export const createWebsocket = (setId, setNotes, setError) => {
     console.log('connected to server');
     setError('');
   });
+  socket.on('connect_error', () => {
+    setError('Connect error');
+  });
+  socket.on('connect_timeout', () => {
+    setError('Connect timeout');
+  });
   socket.on('load', (data) => {
     setNotes(data.notes);
   });
   // socket.on('connect_error', () => {
   // });
   socket.on('disconnect', () => {
-    setError('Websocket disconnected');
+    setError('Disconnected');
   });
   socket.on('error', (errorObj) => {
-    setError('Unknown websocket error');
+    setError('Connect error');
     console.log(JSON.stringify(errorObj));
+  });
+  socket.on('reconnect_error', (errorObj) => {
+    setError('Reconnect error');
+  });
+  socket.on('reconnect_failed', (errorObj) => {
+    setError('Reconnect failed');
   });
   websocket = socket;
 };
