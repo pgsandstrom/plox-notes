@@ -113,7 +113,6 @@ class Main extends React.Component {
             <button
               className="normalize-button standard-button button-save"
               onClick={() => this.props.save(noteid, notes)}
-              style={this.props.ongoingSaves > 0 ?{background:'#ffbeca'}:{}}
             >
               Save
               {this.props.ongoingSaves > 0 &&
