@@ -48,6 +48,7 @@ class Main extends React.Component {
       exited: { opacity: 0, pointerEvents: 'none' },
     };
 
+    const disabled = this.props.error !== ''
     return (
       <div className="react-root">
         <Transition
@@ -93,6 +94,7 @@ class Main extends React.Component {
                 addNote={() => this.props.addNote(index + 1)}
                 delete={() => this.props.removeNote(index)}
                 editNote={text => this.props.editNote(index, text)}
+                disabled={disabled}
               />),
             )}
           </FlipMove>
@@ -100,19 +102,21 @@ class Main extends React.Component {
             <button
               className="normalize-button standard-button button-add"
               onClick={() => this.props.addNote(notes.length)}
+              disabled={disabled}
             >
               Add
             </button>
             <button
               className="normalize-button standard-button button-add"
               onClick={() => this.props.undo()}
-              disabled={this.props.hasHistory === false}
+              disabled={this.props.hasHistory === false || disabled}
             >
               Undo
             </button>
             <button
               className="normalize-button standard-button button-save"
               onClick={() => this.props.save(noteid, notes)}
+              disabled={disabled}
             >
               Save
               {this.props.ongoingSaves > 0 &&
@@ -216,10 +220,12 @@ class Note extends React.Component {
           ref={(input) => {
             this.textInput = input;
           }}
+          disabled={this.props.disabled}
         />
         <button
           className="normalize-button standard-button delete-button"
           onClick={this.props.delete}
+          disabled={this.props.disabled}
         >
           delete
         </button>
@@ -239,6 +245,7 @@ Note.propTypes = {
   setFocus: PropTypes.func,
   moveNote: PropTypes.func.isRequired,
   editNote: PropTypes.func,
+  disabled: PropTypes.bool
 };
 
 export default connect(
