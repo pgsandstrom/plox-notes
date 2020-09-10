@@ -26,7 +26,7 @@
     "font-awesome": "4.7.0",
     "immutability-helper": "2.7.0",
     "isomorphic-style-loader": "4.0.0",
-    "node-fetch": "2.6.0",
+    "node-fetch": "2.6.1",
     "node-sass": "4.13.1",
     "null-loader": "3.0.0",
     "pg": "7.4.3",
